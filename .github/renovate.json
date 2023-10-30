@@ -1,0 +1,35 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":disableRateLimiting",
+    ":skipStatusChecks",
+    "group:all",
+    "schedule:daily"
+  ],
+  "regexManagers": [
+    {
+      "description": "Process metadata versions",
+      "fileMatch": [
+        "apps/.+/metadata\\.json$"
+      ],
+      "matchStrings": [
+        "(\"renovate::dataSource\":\\s*\"(?<datasource>[^\"]+)\",)?\\s*(\"renovate::depName\":\\s*\"(?<depName>[^\"]+)\",)?\\s*(\"renovate::versioning\":\\s*\"(?<versioning>[^\"]+)\",)?\\s*\"version\":\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "extractVersionTemplate": "^v?(?<version>.*)$",
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }, {
+      "description": "Process renovate comments",
+      "fileMatch": [
+        ".github/workflows/.*\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "renovate:\\s*(datasource=(?<datasource>[^\\s]+)\\s*)?(depName=(?<depName>[^\\s]+)\\s*)?(versioning=(?<versioning>[^\\s]+)\\s*)?[^:]*:\\s*(?<currentValue>v?[0-9.]+)"
+      ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ],
+  "ignoreDeps": ["public.ecr.aws/docker/library/ubuntu", "node"]
+}

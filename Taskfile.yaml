@@ -1,0 +1,171 @@
+---
+version: '3'
+
+vars:
+  IMAGE_REGISTRY: containers.io
+  ORG: test
+
+tasks:
+  default:
+    cmds:
+      - go-task -l
+    silent: true
+
+  push:
+    desc: |-
+      go-task APP=<app> push
+    cmds:
+      - |-
+        for channel in $(jq --raw-output '.channels | .[] | .name' apps/{{ .APP }}/metadata.json); do
+          go-task APP={{ .APP }} CHANNEL=${channel} push-channel
+        done
+
+  build:
+    desc: |-
+      go-task APP=<app> build
+    cmds:
+      - |-
+        for channel in $(jq --raw-output '.channels | .[] | .name' apps/{{ .APP }}/metadata.json); do
+          go-task APP={{ .APP }} CHANNEL=${channel} build-channel
+        done
+
+  test:
+    desc: |-
+      go-task APP=<app> test
+    cmds:
+      - |-
+        for channel in $(jq --raw-output '.channels | .[] | .name' apps/{{ .APP }}/metadata.json); do
+          go-task APP={{ .APP }} CHANNEL=${channel} test-channel
+        done
+
+  push-channel:
+    desc: |-
+      go-task APP=<app> CHANNEL=<stable|dev> push-channel
+    cmds:
+      - task: build
+      - |-
+        for tag in {{ .TAGS }}; do
+        echo docker push "${tag}"
+        done
+    vars:
+      BASEIMGVERSION:
+        sh: >-
+          jq --arg chan "{{ .CHANNEL }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion'
+          ./apps/{{ .APP }}/metadata.json
+      VERSION:
+        sh: >-
+          jq --arg chan "{{ .CHANNEL }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .version'
+          ./apps/{{ .APP }}/metadata.json
+      TAGS:
+        sh: >-
+          echo '{{ .VERSION }}' |
+          awk -F. '{ print "#" $1 "#" $1 "." $2 "#" $1 "." $2 "." $3 "#" }' |
+          sed -E 's@[^#]+\.+#@@g' |
+          sed 's@#$@@g' |
+          {{ if eq .CHANNEL "stable" }}
+          sed 's@#@ {{ .IMAGE_REGISTRY }}/{{ .ORG }}/{{ .APP }}:@g' |
+          awk -F\# '{ print $0 " {{ .IMAGE_REGISTRY }}/{{ .ORG }}/{{ .APP }}:latest"}'
+          {{ else }}
+          sed 's@#@ {{ .IMAGE_REGISTRY }}/{{ .ORG }}/{{ .APP }}-{{ .CHANNEL }}:@g' |
+          awk -F\# '{ print $0 " {{ .IMAGE_REGISTRY }}/{{ .ORG }}/{{ .APP }}-{{ .CHANNEL }}:latest"}'
+          {{ end }}
+
+  build-channel:
+    desc: |-
+      go-task APP=<app> CHANNEL=<stable|dev> build-channel
+    cmds:
+      # prepare multiarch docker build
+      # docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+      - task: test
+      # yamllint disable rule:line-length
+      - |-
+        for platform in $(jq --arg chan "{{ .CHANNEL }}" --raw-output \
+        '(.channels | .[] | select(.name == $chan)) | .platforms | join(" ")' ./apps/{{ .APP }}/metadata.json); do
+          docker buildx build --load \
+          {{ .TAGS }} \
+          --build-arg CHANNEL={{ .CHANNEL }} \
+          --build-arg BASEIMGVERSION={{ .BASEIMGVERSION }} \
+          --build-arg VERSION={{ .VERSION }} \
+          --build-arg TARGETPLATFORM="${platform}" \
+          --platform "${platform}" \
+          --label '{{ .LABEL_TYPE }}.created={{ .BUILD_DATE }}' \
+          --label '{{ .LABEL_TYPE }}.title={{ .APP }} ({{ .CHANNEL }})' \
+          --label '{{ .LABEL_TYPE }}.version={{ .VERSION }}' \
+          --label '{{ .LABEL_TYPE }}.authors=Igor Rzegocki <containers@ajgon.ovh>' \
+          --label '{{ .LABEL_TYPE }}.url=https://github.com/ajgon/containers/tree/master/apps/{{ .APP }}' \
+          --label '{{ .LABEL_TYPE }}.documentation=https://github.com/ajgon/containers/tree/master/apps/{{ .APP }}/README.md' \
+          -f apps/{{ .APP }}/Dockerfile apps/{{ .APP }}
+        done
+      # yamllint enable
+    vars:
+      BASE:
+        sh: "jq '.base' apps/{{ .APP }}/metadata.json"
+      BUILD_DATE:
+        sh: "date --rfc-3339=seconds --utc"
+      LABEL_TYPE:
+        sh: >-
+          echo "org.opencontainers.image{{if eq .BASE "true"}}.base{{end}}"
+      BASEIMGVERSION:
+        sh: >-
+          jq --arg chan "{{ .CHANNEL }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion'
+          ./apps/{{ .APP }}/metadata.json
+      VERSION:
+        sh: >-
+          jq --arg chan "{{ .CHANNEL }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .version'
+          ./apps/{{ .APP }}/metadata.json
+      TAGS:
+        sh: >-
+          echo '{{ .VERSION }}' |
+          awk -F. '{ print "#" $1 "#" $1 "." $2 "#" $1 "." $2 "." $3 "#" }' |
+          sed -E 's@[^#]+\.+#@@g' |
+          sed 's@#$@@g' |
+          {{ if eq .CHANNEL "stable" }}
+          sed 's@#@ -t {{ .IMAGE_REGISTRY }}/{{ .ORG }}/{{ .APP }}:@g' |
+          awk -F\# '{ print $0 " -t {{ .IMAGE_REGISTRY }}/{{ .ORG }}/{{ .APP }}:latest"}'
+          {{ else }}
+          sed 's@#@ -t {{ .IMAGE_REGISTRY }}/{{ .ORG }}/{{ .APP }}-{{ .CHANNEL }}:@g' |
+          awk -F\# '{ print $0 " -t {{ .IMAGE_REGISTRY }}/{{ .ORG }}/{{ .APP }}-{{ .CHANNEL }}:latest"}'
+          {{ end }}
+
+  test-channel:
+    desc: |-
+      go-task APP=<app> CHANNEL=<stable|dev> test-channel
+    cmds:
+      - >-
+         cue vet --schema '#Spec' ./apps/{{ .APP }}/metadata.json metadata.rules.cue
+      - >-
+        docker buildx build --load
+        -t test/{{ .APP }}:{{ .CHANNEL }}
+        --build-arg CHANNEL={{ .CHANNEL }}
+        --build-arg BASEIMGVERSION={{ .BASEIMGVERSION }}
+        --build-arg VERSION={{ .VERSION }}
+        --platform linux/amd64
+        -f apps/{{ .APP }}/Dockerfile apps/{{ .APP }}
+      - >-
+        if [ -d apps/{{ .APP }}/ci ]; then
+        dgoss run
+        $([ -d apps/{{ .APP }}/ci/secrets ] && echo "-v $(pwd)/apps/{{ .APP }}/ci/secrets:/secrets")
+        --read-only
+        -u 65000:65000
+        --cap-drop=all
+        test/{{ .APP }}:{{ .CHANNEL }}
+        {{if eq .TEST_MUTE_CMD "true"}}tail -f /dev/null{{end}};
+        fi
+    vars:
+      BASE:
+        sh: "jq '.base' apps/{{ .APP }}/metadata.json"
+      TEST_MUTE_CMD:
+        sh: "jq '.testMuteCmd' apps/{{ .APP }}/metadata.json"
+      BASEIMGVERSION:
+        sh: >-
+          jq --arg chan "{{ .CHANNEL }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion'
+          ./apps/{{ .APP }}/metadata.json
+      VERSION:
+        sh: >-
+          jq --arg chan "{{ .CHANNEL }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .version'
+          ./apps/{{ .APP }}/metadata.json
+    env:
+      CONTAINER_RUNTIME: docker
+      GOSS_OPTS: --sleep 5s --retry-timeout 60s --color --format documentation
+      GOSS_SLEEP: 2
+      GOSS_FILE: ./apps/{{.APP}}/ci/goss.yaml

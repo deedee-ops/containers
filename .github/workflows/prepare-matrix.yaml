@@ -1,0 +1,45 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Prepare matrix of changed images
+'on':
+  workflow_call:
+    outputs:
+      matrix:
+        description: "Matrix of images to build"
+        value: ${{ jobs.prepare-matrix.outputs.matrix }}
+jobs:
+  prepare-matrix:
+    name: Prepare matrix of images to build
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Example 1
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v40
+
+      - name: Setup matrix
+        id: set-matrix
+        run: |
+          apps=" "
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ "${file}" == "apps/"* ]] && [[ "${file}" != *".md" ]]; then
+              app="$(sed -E 's@apps/([^/]+).*@\1@g' <<< "${file}")"
+              if [[ ! "${apps}" == *" ${app} "* ]]; then
+                apps="${apps}${app} "
+              fi
+            fi
+          done
+          matrix="["
+          for app in $(echo "${apps}"); do
+            for channel in $(jq --raw-output '.channels | .[] | .name' apps/${app}/metadata.json); do
+              matrix="${matrix}{\"app\":\"${app}\",\"channel\":\"${channel}\"},"
+            done
+          done
+          matrix="${matrix}]"
+          sed -E 's@,\]@]@g' <<< "matrix=${matrix}" >> $GITHUB_OUTPUT

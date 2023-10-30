@@ -1,0 +1,12 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Validate pull request
+'on': pull_request
+
+jobs:
+  lint:
+    uses: ajgon/containers/.github/workflows/lint.yaml@master
+
+  test:
+    uses: ajgon/containers/.github/workflows/test.yaml@master
+    secrets: inherit

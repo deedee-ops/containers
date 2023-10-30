@@ -1,0 +1,119 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Create and publish a Docker images
+'on': workflow_call
+
+env:
+  IMAGE_REGISTRY: ghcr.io
+
+jobs:
+  prepare-matrix:
+    uses: ajgon/containers/.github/workflows/prepare-matrix.yaml@master
+
+  deploy:
+    needs: prepare-matrix
+    name: Build and test
+    runs-on: ubuntu-latest
+    if: ${{ needs.prepare-matrix.outputs.matrix != '' && needs.prepare-matrix.outputs.matrix != '[]' }}
+    strategy:
+      matrix:
+        apps: ["${{ fromJson(needs.prepare-matrix.outputs.matrix) }}"]
+      fail-fast: false
+    # yamllint disable rule:line-length
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup workflow Variables
+        id: vars
+        shell: bash
+        run: |-
+          base_image=$(jq '.base' --raw-output apps/${{ matrix.apps.app }}/metadata.json)
+          test_mute_cmd=$(jq '.testMuteCmd' --raw-output apps/${{ matrix.apps.app }}/metadata.json)
+          build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .version' ./apps/${{ matrix.apps.app }}/metadata.json)
+          baseimg_build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion' ./apps/${{ matrix.apps.app }}/metadata.json)
+
+          echo "build_date=$(date --rfc-3339=seconds --utc)" >> $GITHUB_OUTPUT
+          echo "build_version=${build_version}" >> $GITHUB_OUTPUT
+          echo "baseimg_build_version=${baseimg_build_version}" >> $GITHUB_OUTPUT
+          echo "goss_file=./apps/${{ matrix.apps.app }}/ci/goss.yaml" >> $GITHUB_OUTPUT
+          echo "base_image=${base_image}" >> $GITHUB_OUTPUT
+          echo "platforms=$(jq --arg chan "${{ matrix.apps.channel }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .platforms | join(",")' ./apps/${{ matrix.apps.app }}/metadata.json)" >> $GITHUB_OUTPUT
+          if [[ "${base_image}" == true ]]; then
+            echo "label_type=org.opencontainers.image.base" >> $GITHUB_OUTPUT
+          else
+            echo "label_type=org.opencontainers.image" >> $GITHUB_OUTPUT
+          fi
+          if [[ "${test_mute_cmd}" == true ]]; then
+            echo "goss_args=tail -f /dev/null" >> $GITHUB_OUTPUT
+          fi
+
+          tags="$(echo "${build_version}" | \
+          awk -F. '{ print "#" $1 "#" $1 "." $2 "#" $1 "." $2 "." $3 "#" }' | \
+          sed -E 's@[^#]+\.+#@@g' | \
+          sed 's@#$@@g' | \
+          sed 's@#@,${{ env.IMAGE_REGISTRY }}/${{ github.repository_owner }}/${{ matrix.apps.app }}---suffix:@g' | \
+          awk -F\# '{ print $0 ",${{ env.IMAGE_REGISTRY }}/${{ github.repository_owner }}/${{ matrix.apps.app }}---suffix:latest"}')"
+          if [[ "${{ matrix.apps.channel }}" == "stable" ]]; then
+            tags="$(sed 's@---suffix@@g' <<< "${tags}")"
+          else
+            tags="$(sed 's@---suffix@-${{ matrix.apps.channel }}@g' <<< "${tags}")"
+          fi
+
+          echo "tags=${tags}" >> $GITHUB_OUTPUT
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Setup Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Setup GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.IMAGE_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build all platforms
+        id: release
+        uses: docker/build-push-action@v5
+        with:
+          build-args: |-
+            BASEIMGVERSION=${{ steps.vars.outputs.baseimg_build_version }}
+            VERSION=${{ steps.vars.outputs.build_version }}
+            CHANNEL=${{ matrix.apps.channel }}
+          labels: |-
+            ${{ steps.vars.outputs.label_type }}.created="${{ steps.vars.outputs.build_date }}"
+            ${{ steps.vars.outputs.label_type }}.title="${{ matrix.apps.app }} (${{ matrix.apps.channel }})"
+            ${{ steps.vars.outputs.label_type }}.version="${{ steps.vars.outputs.build_version }}"
+            ${{ steps.vars.outputs.label_type }}.authors="Igor Rzegocki <containers@ajgon.ovh>"
+            ${{ steps.vars.outputs.label_type }}.url="https://github.com/ajgon/containers/tree/master/apps/${{ matrix.apps.app }}"
+            ${{ steps.vars.outputs.label_type }}.build.url="https://github.com/ajgon/containers/actions/runs/${{ github.run_id }}"
+            ${{ steps.vars.outputs.label_type }}.documentation="https://github.com/ajgon/containers/tree/master/apps/${{ matrix.apps.app }}/README.md"
+            ${{ steps.vars.outputs.label_type }}.revision="${{ github.sha }}"
+          context: apps/${{ matrix.apps.app }}
+          platforms: ${{ steps.vars.outputs.platforms }}
+          file: apps/${{ matrix.apps.app }}/Dockerfile
+          push: true
+          tags: ${{ steps.vars.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          # https://github.com/community/community/discussions/45969#discussioncomment-4852744
+          provenance: false
+          sbom: false
+          # yamllint enable
+
+  # Summarize matrix https://github.community/t/status-check-for-a-matrix-jobs/127354/7
+  build-success:
+    name: Build matrix success
+    runs-on: ubuntu-latest
+    needs:
+      - deploy
+    if: ${{ always() }}
+    steps:
+      - name: Check build matrix status
+        if: ${{ needs.deploy.result != 'success' && needs.deploy.result != 'skipped' }}
+        run: exit 1
