@@ -1,0 +1,17 @@
+{
+  "app": "alpine",
+  "base": true,
+  "testMuteCmd": true,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "public.ecr.aws/docker/library/alpine",
+      "version": "3.18.4",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
