@@ -1,0 +1,17 @@
+---
+# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#file
+file:
+  /usr/bin/maddy:
+    exists: true
+# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#port
+port:
+  tcp6:25:
+    listening: true
+  tcp6:143:
+    listening: true
+  tcp6:465:
+    listening: true
+  tcp6:587:
+    listening: true
+  tcp6:993:
+    listening: true
