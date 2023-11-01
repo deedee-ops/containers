@@ -14,7 +14,7 @@ ENV GO111MODULE=on \
     GOARM=${TARGETVARIANT} \
     GOPATH=/go
 ENV PATH $GOPATH/bin:$PATH
-ENV ENVDIR_VER=v0.1.0
+ENV ENVDIR_VER=v0.1.2
 
 #hadolint ignore=DL3018
 RUN apk add --no-cache bash curl go upx \
@@ -59,8 +59,9 @@ RUN apk --update add --no-cache \
  && ln -s /usr/bin/vi   /usr/local/bin/vim \
  && rm -rf /tmp/*
 
-VOLUME ["/tmp"]
 COPY --from=builder /go/bin/envdir /usr/bin/envdir
 COPY --from=builder /go/bin/envsubst /usr/bin/envsubst
 COPY --chmod=0755 --chown=65000:65000 base-entrypoint.sh /usr/local/bin/base-entrypoint.sh
+
+VOLUME ["/tmp"]
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/base-entrypoint.sh"]

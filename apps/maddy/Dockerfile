@@ -11,10 +11,10 @@ ARG CHANNEL
 COPY --from=source /bin/maddy /usr/bin/maddy
 COPY --from=source /data/maddy.conf /data/maddy.conf
 COPY --chown=65000:65000 _/ /
-USER 65000:65000
 
+USER 65000:65000
 EXPOSE 25 143 465 587 993
-VOLUME ["/data", "/tmp"]
+VOLUME ["/tmp"]
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/base-entrypoint.sh", "/usr/bin/maddy", "-config", "/data/maddy.conf"]
 CMD ["run"]
 
