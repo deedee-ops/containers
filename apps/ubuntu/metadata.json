@@ -1,0 +1,17 @@
+{
+  "app": "ubuntu",
+  "base": true,
+  "testMuteCmd": true,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "public.ecr.aws/docker/library/ubuntu",
+      "version": "22.04",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}

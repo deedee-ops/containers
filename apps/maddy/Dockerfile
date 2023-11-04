@@ -14,7 +14,7 @@ COPY --chown=65000:65000 _/ /
 
 USER 65000:65000
 EXPOSE 25 143 465 587 993
-VOLUME ["/tmp"]
+VOLUME ["/data", "/tmp"]
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/base-entrypoint.sh", "/usr/bin/maddy", "-config", "/data/maddy.conf"]
 CMD ["run"]
 

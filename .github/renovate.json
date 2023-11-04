@@ -31,5 +31,5 @@
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
   ],
-  "ignoreDeps": ["public.ecr.aws/docker/library/ubuntu", "node"]
+  "ignoreDeps": ["public.ecr.aws/docker/library/ubuntu", "ghcr.io/ajgon/ubuntu", "node"]
 }

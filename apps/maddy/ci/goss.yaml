@@ -1,9 +1,9 @@
 ---
-# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#file
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#file
 file:
   /usr/bin/maddy:
     exists: true
-# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#port
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#port
 port:
   tcp6:25:
     listening: true
