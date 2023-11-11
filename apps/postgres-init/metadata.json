@@ -1,0 +1,18 @@
+{
+  "app": "postgres-init",
+  "base": false,
+  "testMuteCmd": true,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "public.ecr.aws/docker/library/postgres",
+      "renovate::versioning": "regex:^(?<major>[0-9]+)[.](?<minor>[0-9]+)$",
+      "version": "16.0",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
