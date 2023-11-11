@@ -1,0 +1,17 @@
+---
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#file
+file:
+  /app/lldap:
+    exists: true
+  /config/server_key:
+    exists: true
+  /config/users.db:
+    exists: true
+  /usr/local/bin/entrypoint.sh:
+    exists: true
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#port
+port:
+  tcp:3890:
+    listening: true
+  tcp:17170:
+    listening: true

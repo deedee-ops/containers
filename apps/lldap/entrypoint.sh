@@ -1,0 +1,7 @@
+#! /usr/bin/env sh
+
+if [ -n "${LLDAP_DATABASE_HOST}" ]; then
+  export LLDAP_DATABASE_URL="${LLDAP_DATABASE_USERNAME}:${LLDAP_DATABASE_PASSWORD}@${LLDAP_DATABASE_HOST}/${LLDAP_DATABASE_DBNAME}"
+fi
+
+exec "$@"
