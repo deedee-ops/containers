@@ -1,0 +1,17 @@
+{
+  "app": "authelia",
+  "base": false,
+  "testMuteCmd": false,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "ghcr.io/authelia/authelia",
+      "version": "4.37.5",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
