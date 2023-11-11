@@ -73,6 +73,7 @@ Each Image will be built with a `latest` tag, along with tags specific to it's v
 
 Container | Channel | Image | Latest Tags
 --- | --- | --- | ---
+[lldap](https://github.com/ajgon/containers/pkgs/container/lldap) | stable | ghcr.io/ajgon/lldap |![0](https://img.shields.io/badge/0-blue?style=flat-square) ![0.5](https://img.shields.io/badge/0.5-blue?style=flat-square) ![0.5.0](https://img.shields.io/badge/0.5.0-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
 [maddy](https://github.com/ajgon/containers/pkgs/container/maddy) | stable | ghcr.io/ajgon/maddy |![0](https://img.shields.io/badge/0-blue?style=flat-square) ![0.7](https://img.shields.io/badge/0.7-blue?style=flat-square) ![0.7.0](https://img.shields.io/badge/0.7.0-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
 [postgres-logical-backup](https://github.com/ajgon/containers/pkgs/container/postgres-logical-backup) | stable | ghcr.io/ajgon/postgres-logical-backup |![16](https://img.shields.io/badge/16-blue?style=flat-square) ![16.0](https://img.shields.io/badge/16.0-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
 
