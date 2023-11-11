@@ -2,6 +2,11 @@
 
 # @source: https://github.com/onedr0p/containers/blob/e623c1af9551ad8e7c8322a95b8a000b73e1cd94/apps/postgres-init/entrypoint.sh
 
+if [ -n "${TEST_ENV}" ]; then
+  exec "$@"
+  exit 0
+fi
+
 # This is most commonly set to the user 'postgres'
 export INIT_POSTGRES_SUPER_USER=${INIT_POSTGRES_SUPER_USER:-postgres}
 

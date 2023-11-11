@@ -1,6 +1,13 @@
 ---
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#group
+group:
+  abc:
+    exists: true
+    gid: 65000
 # https://github.com/goss-org/goss/blob/master/docs/manual.md#file
 file:
+  /sbin/tini:
+    exists: true
   /usr/bin/curl:
     exists: true
   /usr/bin/dig:
@@ -15,15 +22,15 @@ file:
     exists: true
   /usr/bin/nslookup:
     exists: true
+  /usr/local/bin/base-entrypoint.sh:
+    exists: true
+    mode: "0755"
   /usr/share/ca-certificates:
     exists: true
-
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#group
-group:
-  abc:
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#mount
+mount:
+  /tmp:
     exists: true
-    gid: 65000
-
 # https://github.com/goss-org/goss/blob/master/docs/manual.md#user
 user:
   abc:

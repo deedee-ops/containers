@@ -68,7 +68,7 @@ RUN apt-get update \
  && ln -s /usr/bin/tini /sbin/tini \
  && rm -rf /tmp/*
 
-VOLUME ["/config"]
+VOLUME ["/tmp"]
 COPY --from=builder /go/bin/envdir /usr/bin/envdir
 COPY --from=builder /go/bin/envsubst /usr/bin/envsubst
 COPY --chmod=0755 --chown=65000:65000 base-entrypoint.sh /usr/local/bin/base-entrypoint.sh

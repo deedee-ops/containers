@@ -6,12 +6,6 @@ group:
     gid: 65000
 # https://github.com/goss-org/goss/blob/master/docs/manual.md#file
 file:
-  /app/lldap:
-    exists: true
-  /config/server_key:
-    exists: true
-  /config/users.db:
-    exists: true
   /usr/local/bin/base-entrypoint.sh:
     exists: true
     mode: "0755"
@@ -20,16 +14,8 @@ file:
     mode: "0755"
 # https://github.com/goss-org/goss/blob/master/docs/manual.md#mount
 mount:
-  /config:
-    exists: true
   /tmp:
     exists: true
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#port
-port:
-  tcp:3890:
-    listening: true
-  tcp:17170:
-    listening: true
 # https://github.com/goss-org/goss/blob/master/docs/manual.md#user
 user:
   abc:

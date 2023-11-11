@@ -4,6 +4,11 @@
 
 set -e
 
+if [ -n "${TEST_ENV}" ]; then
+  exec "$@"
+  exit 0
+fi
+
 >&2 echo "-----"
 
 if [ "${S3_S3V4:-yes}" = "yes" ]; then

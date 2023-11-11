@@ -1,4 +1,5 @@
 #! /usr/bin/env ash
+# shellcheck shell=dash
 
 if [ -n "${LLDAP_DATABASE_DRIVER}" ] ||
    [ -n "${LLDAP_DATABASE_USERNAME}" ] ||
