@@ -40,7 +40,7 @@ tasks:
 
   push-channel:
     desc: |-
-      go-task APP=<app> CHANNEL=<stable|dev> push-channel
+      go-task APP=<app> CHANNEL=<stable|devel> push-channel
     cmds:
       - task: build
       - |-
