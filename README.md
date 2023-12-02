@@ -13,12 +13,12 @@ _A Collection of Container Images Optimized for Kubernetes_
 
 <div align="center">
 
-![GitHub Repo stars](https://img.shields.io/github/stars/dexters-ops/containers?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/dexters-ops/containers?style=for-the-badge)
+![GitHub Repo stars](https://img.shields.io/github/stars/deedee-ops/containers?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/deedee-ops/containers?style=for-the-badge)
 
 </div>
 
-Welcome to my container images, if looking for a container start by [browsing the container packages](https://github.com/dexters-ops?tab=packages&repo_name=containers).
+Welcome to my container images, if looking for a container start by [browsing the container packages](https://github.com/deedee-ops?tab=packages&repo_name=containers).
 
 ## Mission statement
 
@@ -58,12 +58,12 @@ The containers built here do not use immutable tags, as least not in the more co
 
 A similar approach applies here, but instead of appending a `-ls69` or `-r420` prefix to the tag, instead the sha256 digest of the image is used. While this is not as pretty it is just as functional in making the images immutable.
 
-| Container                                            | Immutable |
-|------------------------------------------------------|-----------|
-| `ghcr.io/dexters-ops/paperless-ngx:latest`                 | ❌         |
-| `ghcr.io/dexters-ops/paperless-ngx:1.17.4`                 | ❌         |
-| `ghcr.io/dexters-ops/paperless-ngx:latest@sha256:613c...`  | ✅         |
-| `ghcr.io/dexters-ops/paperless-ngx:1.17.4@sha256:613c...`  | ✅         |
+| Container                                                 | Immutable |
+|-----------------------------------------------------------|-----------|
+| `ghcr.io/deedee-ops/paperless-ngx:latest`                 | ❌         |
+| `ghcr.io/deedee-ops/paperless-ngx:1.17.4`                 | ❌         |
+| `ghcr.io/deedee-ops/paperless-ngx:latest@sha256:613c...`  | ✅         |
+| `ghcr.io/deedee-ops/paperless-ngx:1.17.4@sha256:613c...`  | ✅         |
 
 _If pinning an image to the sha256 digest, tools like [Renovate](https://github.com/renovatebot/renovate) support updating the container on a digest or application version change._
 
@@ -73,14 +73,14 @@ Each Image will be built with a `latest` tag, along with tags specific to it's v
 
 Container | Channel | Image | Latest Tags
 --- | --- | --- | ---
-[authelia](https://github.com/dexters-ops/containers/pkgs/container/authelia) | stable | ghcr.io/dexters-ops/authelia |![4](https://img.shields.io/badge/4-blue?style=flat-square) ![4.37](https://img.shields.io/badge/4.37-blue?style=flat-square) ![4.37.5](https://img.shields.io/badge/4.37.5-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
-[csp-exporter](https://github.com/dexters-ops/containers/pkgs/container/csp-exporter) | stable | ghcr.io/dexters-ops/csp-exporter |![0](https://img.shields.io/badge/0-blue?style=flat-square) ![0.1](https://img.shields.io/badge/0.1-blue?style=flat-square) ![0.1.0](https://img.shields.io/badge/0.1.0-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
-[lldap](https://github.com/dexters-ops/containers/pkgs/container/lldap) | stable | ghcr.io/dexters-ops/lldap |![0](https://img.shields.io/badge/0-blue?style=flat-square) ![0.5](https://img.shields.io/badge/0.5-blue?style=flat-square) ![0.5.0](https://img.shields.io/badge/0.5.0-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
-[lldap-devel](https://github.com/dexters-ops/containers/pkgs/container/lldap-devel) | devel | ghcr.io/dexters-ops/lldap-devel |![0](https://img.shields.io/badge/0-blue?style=flat-square) ![0.5](https://img.shields.io/badge/0.5-blue?style=flat-square) ![0.5.1](https://img.shields.io/badge/0.5.1-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
-[maddy](https://github.com/dexters-ops/containers/pkgs/container/maddy) | stable | ghcr.io/dexters-ops/maddy |![0](https://img.shields.io/badge/0-blue?style=flat-square) ![0.7](https://img.shields.io/badge/0.7-blue?style=flat-square) ![0.7.0](https://img.shields.io/badge/0.7.0-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
-[postgres-init](https://github.com/dexters-ops/containers/pkgs/container/postgres-init) | stable | ghcr.io/dexters-ops/postgres-init |![16](https://img.shields.io/badge/16-blue?style=flat-square) ![16.1](https://img.shields.io/badge/16.1-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
-[postgres-logical-backup](https://github.com/dexters-ops/containers/pkgs/container/postgres-logical-backup) | stable | ghcr.io/dexters-ops/postgres-logical-backup |![16](https://img.shields.io/badge/16-blue?style=flat-square) ![16.1](https://img.shields.io/badge/16.1-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
-[syncthing](https://github.com/dexters-ops/containers/pkgs/container/syncthing) | stable | ghcr.io/dexters-ops/syncthing |![1](https://img.shields.io/badge/1-blue?style=flat-square) ![1.26](https://img.shields.io/badge/1.26-blue?style=flat-square) ![1.26.1](https://img.shields.io/badge/1.26.1-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
+[authelia](https://github.com/deedee-ops/containers/pkgs/container/authelia) | stable | ghcr.io/deedee-ops/authelia |![4](https://img.shields.io/badge/4-blue?style=flat-square) ![4.37](https://img.shields.io/badge/4.37-blue?style=flat-square) ![4.37.5](https://img.shields.io/badge/4.37.5-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
+[csp-exporter](https://github.com/deedee-ops/containers/pkgs/container/csp-exporter) | stable | ghcr.io/deedee-ops/csp-exporter |![0](https://img.shields.io/badge/0-blue?style=flat-square) ![0.1](https://img.shields.io/badge/0.1-blue?style=flat-square) ![0.1.0](https://img.shields.io/badge/0.1.0-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
+[lldap](https://github.com/deedee-ops/containers/pkgs/container/lldap) | stable | ghcr.io/deedee-ops/lldap |![0](https://img.shields.io/badge/0-blue?style=flat-square) ![0.5](https://img.shields.io/badge/0.5-blue?style=flat-square) ![0.5.0](https://img.shields.io/badge/0.5.0-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
+[lldap-devel](https://github.com/deedee-ops/containers/pkgs/container/lldap-devel) | devel | ghcr.io/deedee-ops/lldap-devel |![0](https://img.shields.io/badge/0-blue?style=flat-square) ![0.5](https://img.shields.io/badge/0.5-blue?style=flat-square) ![0.5.1](https://img.shields.io/badge/0.5.1-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
+[maddy](https://github.com/deedee-ops/containers/pkgs/container/maddy) | stable | ghcr.io/deedee-ops/maddy |![0](https://img.shields.io/badge/0-blue?style=flat-square) ![0.7](https://img.shields.io/badge/0.7-blue?style=flat-square) ![0.7.0](https://img.shields.io/badge/0.7.0-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
+[postgres-init](https://github.com/deedee-ops/containers/pkgs/container/postgres-init) | stable | ghcr.io/deedee-ops/postgres-init |![16](https://img.shields.io/badge/16-blue?style=flat-square) ![16.1](https://img.shields.io/badge/16.1-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
+[postgres-logical-backup](https://github.com/deedee-ops/containers/pkgs/container/postgres-logical-backup) | stable | ghcr.io/deedee-ops/postgres-logical-backup |![16](https://img.shields.io/badge/16-blue?style=flat-square) ![16.1](https://img.shields.io/badge/16.1-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
+[syncthing](https://github.com/deedee-ops/containers/pkgs/container/syncthing) | stable | ghcr.io/deedee-ops/syncthing |![1](https://img.shields.io/badge/1-blue?style=flat-square) ![1.26](https://img.shields.io/badge/1.26-blue?style=flat-square) ![1.26.1](https://img.shields.io/badge/1.26.1-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
 
 
 ## Credits
