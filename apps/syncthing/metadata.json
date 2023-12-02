@@ -1,0 +1,18 @@
+{
+  "app": "syncthing",
+  "base": false,
+  "testMuteCmd": false,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "syncthing/syncthing",
+      "version": "1.26.1",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
+
