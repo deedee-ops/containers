@@ -6,11 +6,11 @@ group:
     gid: 65000
 # https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#file
 file:
-  /usr/bin/syncthing:
+  /usr/bin/navidrome:
     exists: true
 # https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#http
 http:
-  http://localhost:8384/rest/noauth/health:
+  http://localhost:3000/ping:
     status: 200
     timeout: 1000
 # https://github.com/goss-org/goss/blob/master/docs/manual.md#mount
@@ -21,13 +21,7 @@ mount:
     exists: true
 # https://github.com/goss-org/goss/blob/master/docs/manual.md#port
 port:
-  tcp:8384:
-    listening: true
-  tcp6:22000:
-    listening: true
-  udp6:22000:
-    listening: true
-  udp6:21027:
+  tcp6:3000:
     listening: true
 # https://github.com/goss-org/goss/blob/master/docs/manual.md#user
 user:
