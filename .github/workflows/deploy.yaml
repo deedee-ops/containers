@@ -9,7 +9,7 @@ env:
 
 jobs:
   prepare-matrix:
-    uses: dexters-ops/containers/.github/workflows/prepare-matrix.yaml@master
+    uses: deedee-ops/containers/.github/workflows/prepare-matrix.yaml@master
     secrets: inherit
 
   deploy:
@@ -107,9 +107,9 @@ jobs:
             ${{ steps.vars.outputs.label_type }}.title="${{ matrix.apps.app }} (${{ matrix.apps.channel }})"
             ${{ steps.vars.outputs.label_type }}.version="${{ steps.vars.outputs.build_version }}"
             ${{ steps.vars.outputs.label_type }}.authors="Igor Rzegocki <containers@ajgon.ovh>"
-            ${{ steps.vars.outputs.label_type }}.url="https://github.com/dexters-ops/containers/tree/master/apps/${{ matrix.apps.app }}"
-            ${{ steps.vars.outputs.label_type }}.build.url="https://github.com/dexters-ops/containers/actions/runs/${{ github.run_id }}"
-            ${{ steps.vars.outputs.label_type }}.documentation="https://github.com/dexters-ops/containers/tree/master/apps/${{ matrix.apps.app }}/README.md"
+            ${{ steps.vars.outputs.label_type }}.url="https://github.com/deedee-ops/containers/tree/master/apps/${{ matrix.apps.app }}"
+            ${{ steps.vars.outputs.label_type }}.build.url="https://github.com/deedee-ops/containers/actions/runs/${{ github.run_id }}"
+            ${{ steps.vars.outputs.label_type }}.documentation="https://github.com/deedee-ops/containers/tree/master/apps/${{ matrix.apps.app }}/README.md"
             ${{ steps.vars.outputs.label_type }}.revision="${{ github.sha }}"
           context: apps/${{ matrix.apps.app }}
           platforms: ${{ steps.vars.outputs.platforms }}
