@@ -1,4 +1,4 @@
-FROM ghcr.io/ajgon/ubuntu:22.04
+FROM ghcr.io/dexters-ops/ubuntu:22.04
 
 ARG TARGETPLATFORM
 ARG VERSION

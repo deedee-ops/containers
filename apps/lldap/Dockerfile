@@ -3,7 +3,7 @@ ARG VERSION
 ARG BASEIMGVERSION
 FROM ghcr.io/lldap/lldap:${BASEIMGVERSION} as source
 
-FROM ghcr.io/ajgon/alpine:3.18.4
+FROM ghcr.io/dexters-ops/alpine:3.18.5
 
 ARG TARGETPLATFORM
 ARG VERSION

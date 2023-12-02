@@ -8,8 +8,10 @@ name: Deploy image
 
 jobs:
   deploy:
-    uses: ajgon/containers/.github/workflows/deploy.yaml@master
+    uses: dexters-ops/containers/.github/workflows/deploy.yaml@master
+    secrets: inherit
 
   build-readme:
     needs: deploy
-    uses: ajgon/containers/.github/workflows/render-readme.yaml@master
+    uses: dexters-ops/containers/.github/workflows/render-readme.yaml@master
+    secrets: inherit

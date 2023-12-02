@@ -1,0 +1,53 @@
+# yamllint disable rule:comments
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Run all the linters
+'on': workflow_call
+
+jobs:
+  lint:
+    name: Run linters
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Token
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
+        id: generate-token
+        with:
+          app_id: "${{ secrets.BOT_APP_ID }}"
+          private_key: "${{ secrets.BOT_APP_PRIVATE_KEY }}"
+
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          token: "${{ steps.generate-token.outputs.token }}"
+          fetch-depth: 1
+
+      - name: Setup CUE
+        uses: cue-lang/setup-cue@1713281ae501e533ff06108005dffeab9e2e5203 # v1.0.0
+
+      - name: "Linter: CUE"
+        shell: bash
+        run: |-
+          cue vet --schema '#Spec' ./apps/*/metadata.json ./metadata.rules.cue
+
+      - name: "Linter: hadolint"
+        uses: jbergstroem/hadolint-gh-action@eac45b98f6d761309202bd201205a8f8c988bfad # v1.11.0
+        with:
+          annotate: true
+          dockerfile: "apps/*/Dockerfile"
+          error_level: 1
+
+      - name: "Linter: shellcheck"
+        uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38 # v2.0.0
+        with:
+          severity: warning
+
+      - name: "Linter: yamllint"
+        uses: karancode/yamllint-github-action@fdef6bc189425ecc84cc4543b2674566c0827053 # v2.1.1
+        with:
+          yamllint_strict: true
+          yamllint_config_filepath: ./.yamllint
+          yamllint_comment: true
+        env:
+          GITHUB_ACCESS_TOKEN: "${{ steps.generate-token.outputs.token }}"
+# yamllint enable rule:comments

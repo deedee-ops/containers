@@ -1,14 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base",
-    ":disableRateLimiting",
-    ":skipStatusChecks",
-    "group:all",
-    "schedule:daily"
-  ],
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "description": "Process metadata versions",
       "fileMatch": [
         "apps/.+/metadata\\.json$"
@@ -20,6 +14,7 @@
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }, {
+      "customType": "regex",
       "description": "Process renovate comments",
       "fileMatch": [
         ".github/workflows/.*\\.ya?ml$"
@@ -30,6 +25,5 @@
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
-  ],
-  "ignoreDeps": ["public.ecr.aws/docker/library/ubuntu", "ghcr.io/ajgon/ubuntu", "node"]
+  ]
 }

@@ -13,18 +13,18 @@ _A Collection of Container Images Optimized for Kubernetes_
 
 <div align="center">
 
-![GitHub Repo stars](https://img.shields.io/github/stars/ajgon/containers?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/ajgon/containers?style=for-the-badge)
+![GitHub Repo stars](https://img.shields.io/github/stars/dexters-ops/containers?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/dexters-ops/containers?style=for-the-badge)
 
 </div>
 
-Welcome to my container images, if looking for a container start by [browsing the container packages](https://github.com/ajgon?tab=packages&repo_name=containers).
+Welcome to my container images, if looking for a container start by [browsing the container packages](https://github.com/dexters-ops?tab=packages&repo_name=containers).
 
 ## Mission statement
 
 The goal of this project is to support containers for various applications, while following the best practices including:
 
-- [Semating versioning](https://semver.org/)
+- [Semantic versioning](https://semver.org/)
 - [Multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/)
 - Security best practices
     - [Rootless PID 1](https://rootlesscontaine.rs/)
@@ -60,10 +60,10 @@ A similar approach applies here, but instead of appending a `-ls69` or `-r420` p
 
 | Container                                            | Immutable |
 |------------------------------------------------------|-----------|
-| `ghcr.io/ajgon/paperless-ngx:latest`                 | ❌         |
-| `ghcr.io/ajgon/paperless-ngx:1.17.4`                 | ❌         |
-| `ghcr.io/ajgon/paperless-ngx:latest@sha256:613c...`  | ✅         |
-| `ghcr.io/ajgon/paperless-ngx:1.17.4@sha256:613c...`  | ✅         |
+| `ghcr.io/dexters-ops/paperless-ngx:latest`                 | ❌         |
+| `ghcr.io/dexters-ops/paperless-ngx:1.17.4`                 | ❌         |
+| `ghcr.io/dexters-ops/paperless-ngx:latest@sha256:613c...`  | ✅         |
+| `ghcr.io/dexters-ops/paperless-ngx:1.17.4@sha256:613c...`  | ✅         |
 
 _If pinning an image to the sha256 digest, tools like [Renovate](https://github.com/renovatebot/renovate) support updating the container on a digest or application version change._
 
@@ -74,7 +74,7 @@ Each Image will be built with a `latest` tag, along with tags specific to it's v
 Container | Channel | Image | Latest Tags
 --- | --- | --- | ---
 {% for image in app_images | sort(attribute="name") -%}
-[{{ image.name }}]({{ image.html_url }}) | {{ image.channel }} | ghcr.io/ajgon/{{ image.name }} |
+[{{ image.name }}]({{ image.html_url }}) | {{ image.channel }} | ghcr.io/dexters-ops/{{ image.name }} |
 {%- set space = joiner(" ") -%}
 {%- for tag in image.tags -%}
 {{ space() }}![{{ tag }}](https://img.shields.io/badge/{{ tag.replace("-", "--") }}-{% if tag == "latest" %}green{% else %}blue{% endif %}?style=flat-square)

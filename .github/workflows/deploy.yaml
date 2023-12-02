@@ -1,3 +1,4 @@
+# yamllint disable rule:comments
 ---
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: Create and publish a Docker images
@@ -8,7 +9,8 @@ env:
 
 jobs:
   prepare-matrix:
-    uses: ajgon/containers/.github/workflows/prepare-matrix.yaml@master
+    uses: dexters-ops/containers/.github/workflows/prepare-matrix.yaml@master
+    secrets: inherit
 
   deploy:
     needs: prepare-matrix
@@ -21,8 +23,17 @@ jobs:
       fail-fast: false
     # yamllint disable rule:line-length
     steps:
-      - uses: actions/checkout@v4
+      - name: Generate Token
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
+        id: generate-token
         with:
+          app_id: "${{ secrets.BOT_APP_ID }}"
+          private_key: "${{ secrets.BOT_APP_PRIVATE_KEY }}"
+
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          token: "${{ steps.generate-token.outputs.token }}"
           fetch-depth: 1
 
       - name: Setup workflow Variables
@@ -64,20 +75,20 @@ jobs:
           echo "tags=${tags}" >> $GITHUB_OUTPUT
 
       - name: Setup QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@68827325e0b33c7199eb31dd4e31fbe9023e06e3 # v3.0.0
         with:
           image: "public.ecr.aws/eks-distro-build-tooling/binfmt-misc:qemu-v7.0.0"
 
       - name: Setup Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
         with:
           version: latest
           driver-opts: |
             image=public.ecr.aws/vend/moby/buildkit:buildx-stable-1
 
       - name: Setup GHCR
-        uses: docker/login-action@v3
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
         with:
           registry: ${{ env.IMAGE_REGISTRY }}
           username: ${{ github.actor }}
@@ -85,7 +96,7 @@ jobs:
 
       - name: Build all platforms
         id: release
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56 # v5.1.0
         with:
           build-args: |-
             BASEIMGVERSION=${{ steps.vars.outputs.baseimg_build_version }}
@@ -96,9 +107,9 @@ jobs:
             ${{ steps.vars.outputs.label_type }}.title="${{ matrix.apps.app }} (${{ matrix.apps.channel }})"
             ${{ steps.vars.outputs.label_type }}.version="${{ steps.vars.outputs.build_version }}"
             ${{ steps.vars.outputs.label_type }}.authors="Igor Rzegocki <containers@ajgon.ovh>"
-            ${{ steps.vars.outputs.label_type }}.url="https://github.com/ajgon/containers/tree/master/apps/${{ matrix.apps.app }}"
-            ${{ steps.vars.outputs.label_type }}.build.url="https://github.com/ajgon/containers/actions/runs/${{ github.run_id }}"
-            ${{ steps.vars.outputs.label_type }}.documentation="https://github.com/ajgon/containers/tree/master/apps/${{ matrix.apps.app }}/README.md"
+            ${{ steps.vars.outputs.label_type }}.url="https://github.com/dexters-ops/containers/tree/master/apps/${{ matrix.apps.app }}"
+            ${{ steps.vars.outputs.label_type }}.build.url="https://github.com/dexters-ops/containers/actions/runs/${{ github.run_id }}"
+            ${{ steps.vars.outputs.label_type }}.documentation="https://github.com/dexters-ops/containers/tree/master/apps/${{ matrix.apps.app }}/README.md"
             ${{ steps.vars.outputs.label_type }}.revision="${{ github.sha }}"
           context: apps/${{ matrix.apps.app }}
           platforms: ${{ steps.vars.outputs.platforms }}
@@ -123,3 +134,4 @@ jobs:
       - name: Check build matrix status
         if: ${{ needs.deploy.result != 'success' && needs.deploy.result != 'skipped' }}
         run: exit 1
+# yamllint enable rule:comments

@@ -92,8 +92,8 @@ tasks:
           --label '{{ .LABEL_TYPE }}.title={{ .APP }} ({{ .CHANNEL }})' \
           --label '{{ .LABEL_TYPE }}.version={{ .VERSION }}' \
           --label '{{ .LABEL_TYPE }}.authors=Igor Rzegocki <containers@ajgon.ovh>' \
-          --label '{{ .LABEL_TYPE }}.url=https://github.com/ajgon/containers/tree/master/apps/{{ .APP }}' \
-          --label '{{ .LABEL_TYPE }}.documentation=https://github.com/ajgon/containers/tree/master/apps/{{ .APP }}/README.md' \
+          --label '{{ .LABEL_TYPE }}.url=https://github.com/dexters-ops/containers/tree/master/apps/{{ .APP }}' \
+          --label '{{ .LABEL_TYPE }}.documentation=https://github.com/dexters-ops/containers/tree/master/apps/{{ .APP }}/README.md' \
           -f apps/{{ .APP }}/Dockerfile apps/{{ .APP }}
         done
       # yamllint enable
