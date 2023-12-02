@@ -80,6 +80,7 @@ Container | Channel | Image | Latest Tags
 [maddy](https://github.com/dexters-ops/containers/pkgs/container/maddy) | stable | ghcr.io/dexters-ops/maddy |![0](https://img.shields.io/badge/0-blue?style=flat-square) ![0.7](https://img.shields.io/badge/0.7-blue?style=flat-square) ![0.7.0](https://img.shields.io/badge/0.7.0-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
 [postgres-init](https://github.com/dexters-ops/containers/pkgs/container/postgres-init) | stable | ghcr.io/dexters-ops/postgres-init |![16](https://img.shields.io/badge/16-blue?style=flat-square) ![16.1](https://img.shields.io/badge/16.1-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
 [postgres-logical-backup](https://github.com/dexters-ops/containers/pkgs/container/postgres-logical-backup) | stable | ghcr.io/dexters-ops/postgres-logical-backup |![16](https://img.shields.io/badge/16-blue?style=flat-square) ![16.1](https://img.shields.io/badge/16.1-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
+[syncthing](https://github.com/dexters-ops/containers/pkgs/container/syncthing) | stable | ghcr.io/dexters-ops/syncthing |![1](https://img.shields.io/badge/1-blue?style=flat-square) ![1.26](https://img.shields.io/badge/1.26-blue?style=flat-square) ![1.26.1](https://img.shields.io/badge/1.26.1-blue?style=flat-square) ![latest](https://img.shields.io/badge/latest-green?style=flat-square)
 
 
 ## Credits
