@@ -1,0 +1,18 @@
+{
+  "app": "csp-exporter",
+  "base": false,
+  "testMuteCmd": false,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "git-tags",
+      "renovate::depName": "https://git.benburwell.com/csp_exporter",
+      "version": "0.1.0",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
+
