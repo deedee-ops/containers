@@ -17,8 +17,8 @@
       "name": "devel",
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/lldap/lldap",
-      "version": "0.5.1",
-      "baseimgversion": "2023-11-05-alpine",
+      "version": "latest",
+      "baseimgversion": "latest-alpine",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
