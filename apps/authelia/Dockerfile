@@ -2,7 +2,7 @@ ARG TARGETPLATFORM
 ARG VERSION
 FROM ghcr.io/authelia/authelia:${VERSION} as source
 
-FROM ghcr.io/deedee-ops/alpine:3.18.5
+FROM ghcr.io/deedee-ops/alpine:3.19.0
 
 ARG TARGETPLATFORM
 ARG VERSION
