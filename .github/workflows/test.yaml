@@ -48,6 +48,7 @@ jobs:
           echo "goss_file=./apps/${{ matrix.apps.app }}/ci/goss.yaml" >> $GITHUB_OUTPUT
           if [[ "${test_mute_cmd}" == true ]]; then
             echo "goss_args=tail -f /dev/null" >> $GITHUB_OUTPUT
+            echo "goss_entrypoint=--entrypoint ''" >> $GITHUB_OUTPUT
           fi
           if [ -d ./apps/${{ matrix.apps.app }}/ci/secrets ]; then
             echo "goss_run_env=-v $(pwd)/apps/${{ matrix.apps.app }}/ci/secrets:/secrets" >> $GITHUB_OUTPUT
@@ -105,6 +106,7 @@ jobs:
           -u 65000:65000
           --cap-drop=all
           ${{ steps.vars.outputs.goss_run_env }}
+          ${{ steps.vars.outputs.goss_entrypoint }}
           ${{ env.IMAGE_REGISTRY }}/${{ github.repository_owner }}/${{ matrix.apps.app }}:testing
           ${{ steps.vars.outputs.goss_args }}
 

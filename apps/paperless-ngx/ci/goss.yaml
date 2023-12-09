@@ -1,0 +1,24 @@
+---
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#group
+group:
+  paperless:
+    exists: true
+    gid: 65000
+# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#file
+file:
+  /usr/local/bin/paperless_cmd.sh:
+    exists: true
+  /usr/share/tesseract-ocr/5/tessdata/eng.traineddata:
+    exists: true
+  /usr/share/tesseract-ocr/5/tessdata/pol.traineddata:
+    exists: true
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#mount
+mount:
+  /tmp:
+    exists: true
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#user
+user:
+  paperless:
+    exists: true
+    uid: 65000
+    gid: 65000

@@ -54,7 +54,8 @@ tasks:
           ./apps/{{ .APP }}/metadata.json
       VERSION:
         sh: >-
-          jq --arg chan "{{ .CHANNEL }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .version'
+          jq --arg chan "{{ .CHANNEL }}" --raw-output '(.channels | .[] | select(.name == $chan)) |
+          if .version == "master" then "latest" else .version end'
           ./apps/{{ .APP }}/metadata.json
       TAGS:
         sh: >-
@@ -148,6 +149,7 @@ tasks:
         --read-only
         -u 65000:65000
         --cap-drop=all
+        {{if eq .TEST_MUTE_CMD "true"}}--entrypoint ""{{end}}
         test/{{ .APP }}:{{ .CHANNEL }}
         {{if eq .TEST_MUTE_CMD "true"}}tail -f /dev/null{{end}};
         fi

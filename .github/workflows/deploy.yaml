@@ -42,22 +42,18 @@ jobs:
         run: |-
           base_image=$(jq '.base' --raw-output apps/${{ matrix.apps.app }}/metadata.json)
           test_mute_cmd=$(jq '.testMuteCmd' --raw-output apps/${{ matrix.apps.app }}/metadata.json)
-          build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .version' ./apps/${{ matrix.apps.app }}/metadata.json)
+          build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | if .version == "master" then "latest" else .version end' ./apps/${{ matrix.apps.app }}/metadata.json)
           baseimg_build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion' ./apps/${{ matrix.apps.app }}/metadata.json)
 
           echo "build_date=$(date --rfc-3339=seconds --utc)" >> $GITHUB_OUTPUT
           echo "build_version=${build_version}" >> $GITHUB_OUTPUT
           echo "baseimg_build_version=${baseimg_build_version}" >> $GITHUB_OUTPUT
-          echo "goss_file=./apps/${{ matrix.apps.app }}/ci/goss.yaml" >> $GITHUB_OUTPUT
           echo "base_image=${base_image}" >> $GITHUB_OUTPUT
           echo "platforms=$(jq --arg chan "${{ matrix.apps.channel }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .platforms | join(",")' ./apps/${{ matrix.apps.app }}/metadata.json)" >> $GITHUB_OUTPUT
           if [[ "${base_image}" == true ]]; then
             echo "label_type=org.opencontainers.image.base" >> $GITHUB_OUTPUT
           else
             echo "label_type=org.opencontainers.image" >> $GITHUB_OUTPUT
-          fi
-          if [[ "${test_mute_cmd}" == true ]]; then
-            echo "goss_args=tail -f /dev/null" >> $GITHUB_OUTPUT
           fi
 
           tags="$(echo "${build_version}" | \
