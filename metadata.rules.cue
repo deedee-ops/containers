@@ -9,6 +9,7 @@
 	name: #NonEmptyString
   "renovate::dataSource"?: string
   "renovate::depName"?: string
+  "renovate::packageName"?: string
   "renovate::versioning"?: string
 	baseimgversion?: string
 	version: #NonEmptyString

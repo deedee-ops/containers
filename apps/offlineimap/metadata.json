@@ -1,0 +1,18 @@
+{
+  "app": "offlineimap",
+  "base": false,
+  "testMuteCmd": true,
+  "channels": [
+    {
+      "name": "devel",
+      "renovate::dataSource": "git-refs",
+      "renovate::depName": "offlineimap3",
+      "renovate::packageName": "https://github.com/OfflineIMAP/offlineimap3",
+      "version": "master",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
