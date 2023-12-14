@@ -12,7 +12,6 @@
       ],
       "extractVersionTemplate": "^v?(?<version>.*)$",
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}",
-      "packageNameTemplate": "{{#if packageName}}{{{packageName}}}{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }, {
       "customType": "regex",
