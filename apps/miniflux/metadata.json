@@ -1,0 +1,17 @@
+{
+  "app": "miniflux",
+  "base": false,
+  "testMuteCmd": true,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "ghcr.io/miniflux/miniflux",
+      "version": "2.0.51",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
