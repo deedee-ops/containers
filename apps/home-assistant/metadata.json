@@ -1,0 +1,17 @@
+{
+  "app": "home-assistant",
+  "base": false,
+  "testMuteCmd": false,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "ghcr.io/onedr0p/home-assistant",
+      "version": "2023.12.3",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}

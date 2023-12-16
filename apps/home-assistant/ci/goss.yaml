@@ -1,0 +1,34 @@
+---
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#group
+group:
+  abc:
+    exists: true
+    gid: 65000
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#file
+file:
+  /usr/bin/envdir:
+    exists: true
+  /usr/bin/envsubst:
+    exists: true
+  /usr/local/bin/base-entrypoint.sh:
+    exists: true
+    mode: "0755"
+# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#http
+http:
+  http://localhost:8123/:
+    status: 200
+    timeout: 1000
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#mount
+mount:
+  /tmp:
+    exists: true
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#port
+port:
+  tcp6:8123:
+    listening: true
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#user
+user:
+  abc:
+    exists: true
+    uid: 65000
+    gid: 65000
