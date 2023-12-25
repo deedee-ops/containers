@@ -1,3 +1,4 @@
+# yamllint disable rule:comments
 ---
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: Run all the tests
@@ -135,3 +136,4 @@ jobs:
       - name: Check build matrix status
         if: ${{ needs.test.result != 'success' }}
         run: exit 1
+# yamllint enable rule:comments

@@ -2,7 +2,10 @@
 ---
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: Run all the linters
-'on': workflow_call
+
+'on':
+  workflow_dispatch:
+  push:
 
 jobs:
   lint:
