@@ -1,0 +1,17 @@
+{
+  "app": "script-exporter",
+  "base": false,
+  "testMuteCmd": false,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "ricoberger/script_exporter",
+      "version": "2.16.0",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
