@@ -1,0 +1,17 @@
+{
+  "app": "jellyfin",
+  "base": false,
+  "testMuteCmd": false,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "github-releases",
+      "renovate::depName": "jellyfin/jellyfin",
+      "version": "10.8.13",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
