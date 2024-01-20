@@ -43,10 +43,12 @@ jobs:
           base_image=$(jq '.base' --raw-output apps/${{ matrix.apps.app }}/metadata.json)
           test_mute_cmd=$(jq '.testMuteCmd' --raw-output apps/${{ matrix.apps.app }}/metadata.json)
           build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | if .version == "master" then "latest" else .version end' ./apps/${{ matrix.apps.app }}/metadata.json)
+          build_metavar=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .metavar' ./apps/${{ matrix.apps.app }}/metadata.json)
           baseimg_build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion' ./apps/${{ matrix.apps.app }}/metadata.json)
 
           echo "build_date=$(date --rfc-3339=seconds --utc)" >> $GITHUB_OUTPUT
           echo "build_version=${build_version}" >> $GITHUB_OUTPUT
+          echo "build_metavar=${build_metavar}" >> $GITHUB_OUTPUT
           echo "baseimg_build_version=${baseimg_build_version}" >> $GITHUB_OUTPUT
           echo "base_image=${base_image}" >> $GITHUB_OUTPUT
           echo "platforms=$(jq --arg chan "${{ matrix.apps.channel }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .platforms | join(",")' ./apps/${{ matrix.apps.app }}/metadata.json)" >> $GITHUB_OUTPUT
@@ -57,7 +59,7 @@ jobs:
           fi
 
           tags="$(echo "${build_version}" | \
-          awk -F. '{ print "#" $1 "#" $1 "." $2 "#" $1 "." $2 "." $3 "#" }' | \
+          awk -F. '{ print "#" $1 "#" $1 "." $2 "#" $1 "." $2 "." $3 "#" $1 "." $2 "." $3 "." $4 "#" }' | \
           sed -E 's@[^#]+\.+#@@g' | \
           sed 's@#$@@g' | \
           sed 's@#@,${{ env.IMAGE_REGISTRY }}/${{ github.repository_owner }}/${{ matrix.apps.app }}---suffix:@g' | \
@@ -96,6 +98,7 @@ jobs:
         with:
           build-args: |-
             BASEIMGVERSION=${{ steps.vars.outputs.baseimg_build_version }}
+            METAVAR=${{ steps.vars.outputs.build_metavar }}
             VERSION=${{ steps.vars.outputs.build_version }}
             CHANNEL=${{ matrix.apps.channel }}
           labels: |-

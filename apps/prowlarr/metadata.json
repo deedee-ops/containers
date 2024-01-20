@@ -1,0 +1,38 @@
+{
+  "app": "prowlarr",
+  "base": false,
+  "testMuteCmd": false,
+  "channels": [
+    {
+      "name": "stable",
+      "metavar": "",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "ghcr.io/onedr0p/prowlarr",
+      "version": "1.12.2.4211",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }, {
+      "name": "devel",
+      "metavar": "-develop",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "ghcr.io/onedr0p/prowlarr-develop",
+      "version": "1.12.2.4211",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }, {
+      "name": "nightly",
+      "metavar": "-nightly",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "ghcr.io/onedr0p/prowlarr-nightly",
+      "version": "1.13.0.4217",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}

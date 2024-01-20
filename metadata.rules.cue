@@ -12,6 +12,7 @@
   "renovate::packageName"?: string
   "renovate::versioning"?: string
 	baseimgversion?: string
+	metavar?: string
 	version: #NonEmptyString
 	platforms: [...#AcceptedPlatforms]
 }

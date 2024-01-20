@@ -85,6 +85,7 @@ tasks:
           docker buildx build --load \
           {{ .TAGS }} \
           --build-arg CHANNEL={{ .CHANNEL }} \
+          --build-arg METAVAR={{ .METAVAR }} \
           --build-arg BASEIMGVERSION={{ .BASEIMGVERSION }} \
           --build-arg VERSION={{ .VERSION }} \
           --build-arg TARGETPLATFORM="${platform}" \
@@ -109,6 +110,10 @@ tasks:
       BASEIMGVERSION:
         sh: >-
           jq --arg chan "{{ .CHANNEL }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion'
+          ./apps/{{ .APP }}/metadata.json
+      METAVAR:
+        sh: >-
+          jq --arg chan "{{ .CHANNEL }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .metavar'
           ./apps/{{ .APP }}/metadata.json
       VERSION:
         sh: >-
@@ -138,6 +143,7 @@ tasks:
         docker buildx build --load
         -t test/{{ .APP }}:{{ .CHANNEL }}
         --build-arg CHANNEL={{ .CHANNEL }}
+        --build-arg METAVAR={{ .METAVAR }}
         --build-arg BASEIMGVERSION={{ .BASEIMGVERSION }}
         --build-arg VERSION={{ .VERSION }}
         --platform linux/amd64
@@ -161,6 +167,10 @@ tasks:
       BASEIMGVERSION:
         sh: >-
           jq --arg chan "{{ .CHANNEL }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion'
+          ./apps/{{ .APP }}/metadata.json
+      METAVAR:
+        sh: >-
+          jq --arg chan "{{ .CHANNEL }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .metavar'
           ./apps/{{ .APP }}/metadata.json
       VERSION:
         sh: >-
