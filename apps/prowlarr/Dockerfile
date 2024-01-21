@@ -49,9 +49,9 @@ RUN apk --update add --no-cache \
     tzdata \
  && addgroup -S abc --gid 65000 \
  && adduser -S abc -G abc --uid 65000 \
- && mkdir -p /config /data \
- && chown -R abc:abc /app /config /data \
- && chmod -R 775 /app /config /data \
+ && mkdir -p /config \
+ && chown -R abc:abc /app /config \
+ && chmod -R 775 /app /config \
  && printf "umask %d" "${UMASK}" > /etc/profile.d/umask.sh \
  && rm -rf /tmp/*
 
@@ -59,7 +59,7 @@ COPY --from=builder /go/bin/envdir /usr/bin/envdir
 COPY --from=builder /go/bin/envsubst /usr/bin/envsubst
 COPY --chmod=0755 --chown=65000:65000 base-entrypoint.sh /usr/local/bin/base-entrypoint.sh
 
-VOLUME ["/tmp"]
+VOLUME ["/config", "/tmp"]
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/base-entrypoint.sh"]
 CMD ["/entrypoint.sh"]
 
