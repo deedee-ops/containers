@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/navidrome/navidrome",
-      "version": "0.50.2",
+      "version": "0.51.0",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
