@@ -3,7 +3,7 @@ ARG VERSION
 FROM ricoberger/script_exporter:v${VERSION} as source
 FROM public.ecr.aws/bitnami/kubectl:1.29.1 as kubectl
 
-FROM ghcr.io/deedee-ops/alpine:3.19.0
+FROM ghcr.io/deedee-ops/alpine:3.19.1
 
 ARG TARGETPLATFORM
 ARG VERSION
