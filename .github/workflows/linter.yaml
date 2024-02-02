@@ -34,7 +34,7 @@ jobs:
           cue vet --schema '#Spec' ./apps/*/metadata.json ./metadata.rules.cue
 
       - name: "Linter: hadolint"
-        uses: jbergstroem/hadolint-gh-action@eac45b98f6d761309202bd201205a8f8c988bfad # v1.11.0
+        uses: jbergstroem/hadolint-gh-action@b403573a010c19a87416d7b414a15d0ab91f26d0 # v1.12.0
         with:
           annotate: true
           dockerfile: "apps/*/Dockerfile"
