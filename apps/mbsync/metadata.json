@@ -1,0 +1,15 @@
+{
+  "app": "mbsync",
+  "base": false,
+  "testMuteCmd": true,
+  "channels": [
+    {
+      "name": "devel",
+      "version": "master",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
