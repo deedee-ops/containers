@@ -1,0 +1,17 @@
+{
+  "app": "roundcube",
+  "base": false,
+  "testMuteCmd": false,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "github-releases",
+      "renovate::depName": "roundcube/roundcubemail",
+      "version": "1.6.6",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
