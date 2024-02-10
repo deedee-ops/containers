@@ -35,7 +35,8 @@ FROM ghcr.io/paperless-ngx/paperless-ngx:${VERSION}
 # Paperless-ngx image is about right, but needs to be rootless by default.
 ENV PAPERLESS_CONSUMPTION_DIR=/data/consume \
     PAPERLESS_DATA_DIR=/config \
-    PAPERLESS_MEDIA_ROOT=/data/media
+    PAPERLESS_MEDIA_ROOT=/data/media \
+    PAPERLESS_SUPERVISORD_WORKING_DIR=/tmp
 
 #hadolint ignore=DL3008
 RUN apt-get update \
@@ -59,7 +60,6 @@ RUN apt-get update \
  && mkdir -p /config/static /data/consume /data/media \
  && chown -R 65000:65000 /config /data /usr/src/paperless \
  && chmod -R 775 /data /config \
- && sed -i'' 's@\tsupervisord@\t/tmp/supervisord@g' /usr/local/bin/paperless_cmd.sh \
  && printf "umask %d" "${UMASK}" > /etc/profile.d/umask.sh \
  && ln -s /usr/bin/vi   /usr/local/bin/vi \
  && ln -s /usr/bin/vi   /usr/local/bin/vim \
