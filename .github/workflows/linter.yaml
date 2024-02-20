@@ -26,7 +26,7 @@ jobs:
           fetch-depth: 1
 
       - name: Setup CUE
-        uses: cue-lang/setup-cue@1713281ae501e533ff06108005dffeab9e2e5203 # v1.0.0
+        uses: cue-lang/setup-cue@a93fa358375740cd8b0078f76355512b9208acb1 # v1.0.1
 
       - name: "Linter: CUE"
         shell: bash
