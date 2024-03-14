@@ -8,7 +8,15 @@ sigint_handler()
 
 generate_config()
 {
-  yq eval-all ". as \$item ireduce ({}; . *+ \$item )" /config/*.y*ml > /tmp/configuration.yaml
+  # authelia 4.38 introduced templating engine, which breaks yq - we need to escape it
+  MASK="$(head -n 20 /dev/urandom | sha512sum)"
+  mkdir -p /tmp/config
+  for f in /config/*.y*ml; do
+    sed "s/{{/${MASK}/g" "${f}" > /tmp/config/"$(basename "${f}")"
+  done
+  yq eval-all ". as \$item ireduce ({}; . *+ \$item )" /tmp/config/*.y*ml > /tmp/configuration.yaml
+  sed -i'' "s/${MASK}/{{/g" /tmp/configuration.yaml
+  rm -rf /tmp/config
 }
 
 count_configs()
