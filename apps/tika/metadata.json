@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "github-tags",
       "renovate::depName": "apache/tika",
-      "version": "2.9.1",
+      "version": "2.9.2",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
