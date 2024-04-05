@@ -1,0 +1,30 @@
+{
+  "app": "sonarr",
+  "base": false,
+  "testMuteCmd": false,
+  "channels": [
+    {
+      "name": "stable",
+      "metavar": "",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "ghcr.io/onedr0p/sonarr",
+      "renovate::versioning": "loose",
+      "version": "4.0.2.1183",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }, {
+      "name": "devel",
+      "metavar": "-develop",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "ghcr.io/onedr0p/sonarr-develop",
+      "renovate::versioning": "loose",
+      "version": "4.0.2.1367",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
