@@ -15,8 +15,7 @@
           devShells.default = pkgs.mkShell {
             buildInputs = [
               pkgs.cue
-              pkgs.dgoss
-              # pkgs.goss
+              # pkgs.dgoss
               pkgs.go-task
               pkgs.jq
               pkgs.lefthook
