@@ -154,6 +154,7 @@ tasks:
         $([ -d apps/{{ .APP }}/ci/secrets ] && echo "-v $(pwd)/apps/{{ .APP }}/ci/secrets:/secrets")
         --read-only
         -u 65000:65000
+        $([ -d /nix ] && echo "-v /nix:/nix")
         --cap-drop=all
         {{if eq .TEST_MUTE_CMD "true"}}--entrypoint ""{{end}}
         test/{{ .APP }}:{{ .CHANNEL }}

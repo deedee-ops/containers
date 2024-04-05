@@ -16,7 +16,7 @@
             buildInputs = [
               pkgs.cue
               pkgs.dgoss
-              pkgs.goss
+              # pkgs.goss
               pkgs.go-task
               pkgs.jq
               pkgs.lefthook

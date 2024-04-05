@@ -1,5 +1,5 @@
 {
-  "app": "prowlarr",
+  "app": "radarr",
   "base": false,
   "testMuteCmd": false,
   "channels": [
@@ -7,9 +7,9 @@
       "name": "stable",
       "metavar": "",
       "renovate::dataSource": "docker",
-      "renovate::depName": "ghcr.io/onedr0p/prowlarr",
+      "renovate::depName": "ghcr.io/onedr0p/radarr",
       "renovate::versioning": "loose",
-      "version": "1.12.2.4211",
+      "version": "5.2.6.8376",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
@@ -18,9 +18,9 @@
       "name": "devel",
       "metavar": "-develop",
       "renovate::dataSource": "docker",
-      "renovate::depName": "ghcr.io/onedr0p/prowlarr-develop",
+      "renovate::depName": "ghcr.io/onedr0p/radarr-develop",
       "renovate::versioning": "loose",
-      "version": "1.12.2.4211",
+      "version": "5.4.3.8677",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
@@ -29,9 +29,9 @@
       "name": "nightly",
       "metavar": "-nightly",
       "renovate::dataSource": "docker",
-      "renovate::depName": "ghcr.io/onedr0p/prowlarr-nightly",
+      "renovate::depName": "ghcr.io/onedr0p/radarr-nightly",
       "renovate::versioning": "loose",
-      "version": "1.13.0.4217",
+      "version": "5.4.5.8692",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
