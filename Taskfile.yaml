@@ -73,7 +73,7 @@ tasks:
 
   build-channel:
     desc: |-
-      go-task APP=<app> CHANNEL=<stable|dev> build-channel
+      go-task APP=<app> CHANNEL=<stable|devel> build-channel
     cmds:
       # prepare multiarch docker build
       # docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
@@ -135,7 +135,7 @@ tasks:
 
   test-channel:
     desc: |-
-      go-task APP=<app> CHANNEL=<stable|dev> test-channel
+      go-task APP=<app> CHANNEL=<stable|devel> test-channel
     cmds:
       - >-
          cue vet --schema '#Spec' ./apps/{{ .APP }}/metadata.json metadata.rules.cue
