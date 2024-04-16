@@ -31,7 +31,7 @@
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/onedr0p/prowlarr-nightly",
       "renovate::versioning": "loose",
-      "version": "1.16.2.4430",
+      "version": "1.16.2.4431",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
