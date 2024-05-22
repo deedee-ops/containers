@@ -2,7 +2,7 @@ ARG TARGETPLATFORM
 ARG VERSION
 FROM syncthing/syncthing:${VERSION} as source
 
-FROM ghcr.io/deedee-ops/alpine:3.19.1
+FROM ghcr.io/deedee-ops/alpine:3.20.0
 
 ARG TARGETPLATFORM
 ARG VERSION
