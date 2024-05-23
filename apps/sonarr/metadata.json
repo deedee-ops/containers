@@ -20,7 +20,7 @@
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/onedr0p/sonarr-develop",
       "renovate::versioning": "loose",
-      "version": "4.0.4.1692",
+      "version": "4.0.4.1695",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
