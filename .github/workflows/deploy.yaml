@@ -73,7 +73,7 @@ jobs:
           echo "tags=${tags}" >> $GITHUB_OUTPUT
 
       - name: Setup QEMU
-        uses: docker/setup-qemu-action@68827325e0b33c7199eb31dd4e31fbe9023e06e3 # v3.0.0
+        uses: docker/setup-qemu-action@5927c834f5b4fdf503fca6f4c7eccda82949e1ee # v3.1.0
         with:
           image: "public.ecr.aws/eks-distro-build-tooling/binfmt-misc:qemu-v7.0.0"
 
