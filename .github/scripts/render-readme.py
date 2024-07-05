@@ -61,9 +61,12 @@ if __name__ == "__main__":
                     name = "-".join([meta["app"], channel["name"]])
                 image = {
                     "name": name,
+                    "insecure": False,
                     "channel": channel["name"],
                     "html_url": ""
                 }
+                if meta.get("insecure"):
+                    image["insecure"] = True
                 gh_data = get_latest_image(owner, name)
                 if gh_data is not None:
                     image["html_url"] = f"https://github.com/{owner}/containers/pkgs/container/{name}"

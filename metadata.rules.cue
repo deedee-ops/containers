@@ -1,6 +1,7 @@
 #Spec: {
 	app:  #NonEmptyString
 	base: bool
+	insecure?: bool
 	testMuteCmd: bool
 	channels: [...#Channels]
 }

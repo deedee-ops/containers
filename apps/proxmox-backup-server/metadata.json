@@ -1,0 +1,18 @@
+{
+  "app": "proxmox-backup-server",
+  "base": false,
+  "insecure": true,
+  "testMuteCmd": true,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "ayufan/proxmox-backup-server",
+      "version": "3.1.2",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}

@@ -40,6 +40,7 @@ jobs:
         id: vars
         shell: bash
         run: |-
+          insecure=$(jq '.insecure' --raw-output apps/${{ matrix.apps.app }}/metadata.json)
           test_mute_cmd=$(jq '.testMuteCmd' --raw-output apps/${{ matrix.apps.app }}/metadata.json)
           build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .version' ./apps/${{ matrix.apps.app }}/metadata.json)
           baseimg_build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion' ./apps/${{ matrix.apps.app }}/metadata.json)
@@ -50,6 +51,8 @@ jobs:
           if [[ "${test_mute_cmd}" == true ]]; then
             echo "goss_args=tail -f /dev/null" >> $GITHUB_OUTPUT
             echo "goss_entrypoint=--entrypoint ''" >> $GITHUB_OUTPUT
+          if [[ "${insecure}" != true ]]; then
+            echo "goss_secure=--read-only -u 65000:65000" >> $GITHUB_OUTPUT
           fi
           if [ -d ./apps/${{ matrix.apps.app }}/ci/secrets ]; then
             echo "goss_run_env=-v $(pwd)/apps/${{ matrix.apps.app }}/ci/secrets:/secrets" >> $GITHUB_OUTPUT
@@ -103,8 +106,7 @@ jobs:
           CONTAINER_LOG_OUTPUT: goss_container_log_output
         run: >-
           dgoss run
-          --read-only
-          -u 65000:65000
+          ${{ steps.vars.outputs.goss_secure }}
           --cap-drop=all
           ${{ steps.vars.outputs.goss_run_env }}
           ${{ steps.vars.outputs.goss_entrypoint }}

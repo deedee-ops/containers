@@ -42,6 +42,8 @@ The goal of this project is to support containers for various applications, whil
         - All assets (photos, movies, Linux ISOs) should live in `/data` endpoint
         - Writable `/tmp`
 
+Very few containers (like `proxmox-backup-server`) are basically full operating systems, squished into container format. These ones need root and rw permissions to work properly. They will be marked accordingly in [Available Images](#available-images) table.
+
 ## Global env variables
 
 These environment variables are universally available across all images:
@@ -71,10 +73,10 @@ _If pinning an image to the sha256 digest, tools like [Renovate](https://github.
 
 Each Image will be built with a `latest` tag, along with tags specific to it's version. Available Images Below
 
-Container | Channel | Image | Latest Tags
---- | --- | --- | ---
+Container | Root/RW | Channel | Image | Latest Tags
+--- | --- | --- | --- | ---
 {% for image in app_images | sort(attribute="name") -%}
-[{{ image.name }}]({{ image.html_url }}) | {{ image.channel }} | ghcr.io/deedee-ops/{{ image.name }} |
+[{{ image.name }}]({{ image.html_url }}) | {%- if image.insecure %}❗{%- endif %} | {{ image.channel }} | ghcr.io/deedee-ops/{{ image.name }} |
 {%- set space = joiner(" ") -%}
 {%- for tag in image.tags -%}
 {{ space() }}![{{ tag }}](https://img.shields.io/badge/{{ tag.replace("-", "--") }}-{% if tag == "latest" %}green{% else %}blue{% endif %}?style=flat-square)

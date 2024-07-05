@@ -152,8 +152,10 @@ tasks:
         if [ -d apps/{{ .APP }}/ci ]; then
         dgoss run
         $([ -d apps/{{ .APP }}/ci/secrets ] && echo "-v $(pwd)/apps/{{ .APP }}/ci/secrets:/secrets")
+        {{if ne .INSECURE "true"}}
         --read-only
         -u 65000:65000
+        {{end}}
         $([ -d /nix ] && echo "-v /nix:/nix")
         --cap-drop=all
         {{if eq .TEST_MUTE_CMD "true"}}--entrypoint ""{{end}}
@@ -163,6 +165,8 @@ tasks:
     vars:
       BASE:
         sh: "jq '.base' apps/{{ .APP }}/metadata.json"
+      INSECURE:
+        sh: "jq '.insecure' apps/{{ .APP }}/metadata.json"
       TEST_MUTE_CMD:
         sh: "jq '.testMuteCmd' apps/{{ .APP }}/metadata.json"
       BASEIMGVERSION:
