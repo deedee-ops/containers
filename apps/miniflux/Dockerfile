@@ -2,7 +2,7 @@ ARG TARGETPLATFORM
 ARG VERSION
 FROM ghcr.io/miniflux/miniflux:${VERSION} as source
 
-FROM ghcr.io/deedee-ops/alpine:3.20.1
+FROM ghcr.io/deedee-ops/alpine:3.20.2
 
 ARG TARGETPLATFORM
 ARG VERSION
