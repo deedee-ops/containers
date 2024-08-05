@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "github-releases",
       "renovate::depName": "jellyfin/jellyfin",
-      "version": "10.9.8",
+      "version": "10.9.9",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
