@@ -94,7 +94,7 @@ jobs:
 
       - name: Build all platforms
         id: release
-        uses: docker/build-push-action@4f7cdeb0f05278b464e71357394bf2c61f94138e # v6.6.0
+        uses: docker/build-push-action@16ebe778df0e7752d2cfcbd924afdbbd89c1a755 # v6.6.1
         with:
           build-args: |-
             BASEIMGVERSION=${{ steps.vars.outputs.baseimg_build_version }}
