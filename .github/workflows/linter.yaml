@@ -4,6 +4,7 @@
 name: Run all the linters
 
 'on':
+  workflow_call:
   workflow_dispatch:
   push:
 
