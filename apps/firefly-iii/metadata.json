@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "docker",
       "renovate::depName": "fireflyiii/core",
-      "version": "6.0.30",
+      "version": "version-6.0.30",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
