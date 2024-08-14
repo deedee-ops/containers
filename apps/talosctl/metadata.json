@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/siderolabs/talosctl",
-      "version": "1.7.5",
+      "version": "1.7.6",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
