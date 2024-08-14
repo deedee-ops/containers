@@ -8,10 +8,11 @@
 
 #Channels: {
 	name: #NonEmptyString
-  "renovate::dataSource"?: string
-  "renovate::depName"?: string
-  "renovate::packageName"?: string
-  "renovate::versioning"?: string
+	"renovate::dataSource"?: string
+	"renovate::depName"?: string
+	"renovate::packageName"?: string
+	"renovate::extractVersion"?: string
+	"renovate::versioning"?: string
 	baseimgversion?: string
 	metavar?: string
 	version: #NonEmptyString
