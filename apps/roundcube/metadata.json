@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "github-releases",
       "renovate::depName": "roundcube/roundcubemail",
-      "version": "1.6.7",
+      "version": "1.6.8",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
