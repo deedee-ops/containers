@@ -51,6 +51,7 @@ jobs:
           if [[ "${test_mute_cmd}" == true ]]; then
             echo "goss_args=tail -f /dev/null" >> $GITHUB_OUTPUT
             echo "goss_entrypoint=--entrypoint ''" >> $GITHUB_OUTPUT
+          fi
           if [[ "${insecure}" != true ]]; then
             echo "goss_secure=--read-only -u 65000:65000" >> $GITHUB_OUTPUT
           fi
