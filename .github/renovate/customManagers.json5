@@ -10,7 +10,7 @@
       "matchStrings": [
         "(\"renovate::dataSource\":\\s*\"(?<datasource>[^\"]+)\",)?\\s*(\"renovate::depName\":\\s*\"(?<depName>[^\"]+)\",)?\\s*(\"renovate::packageName\":\\s*\"(?<packageName>[^\"]+)\",)?\\s*(\"renovate::versioning\":\\s*\"(?<versioning>[^\"]+)\",)?\\s*\"version\":\\s*\"(?<currentValue>[^\"]+)\""
       ],
-      "extractVersionTemplate": "^[^\\d]+(?<version>(?:\\d\\.)+\\d).*$",
+      "extractVersionTemplate": "^[^\\d]*(?<version>(?:\\d\\.)+\\d).*$",
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver-coerced{{/if}}"
     }, {
