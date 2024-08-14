@@ -12,16 +12,6 @@
         "linux/amd64",
         "linux/arm64"
       ]
-    }, {
-      "name": "devel",
-      "metavar": "-develop",
-      "renovate::dataSource": "github-releases",
-      "renovate::depName": "CyferShepard/Jellystat",
-      "version": "latest",
-      "platforms": [
-        "linux/amd64",
-        "linux/arm64"
-      ]
     }
   ]
 }
