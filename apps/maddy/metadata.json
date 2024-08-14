@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/foxcpp/maddy",
-      "version": "0.7.1",
+      "version": "0.7.0",
       "platforms": [
         "linux/amd64",
         "linux/arm64"

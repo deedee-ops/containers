@@ -1,7 +1,6 @@
 ARG TARGETPLATFORM
 ARG VERSION
-ARG BASEIMGVERSION
-FROM ghcr.io/lldap/lldap:${BASEIMGVERSION} as source
+FROM ghcr.io/lldap/lldap:${VERSION} as source
 
 FROM ghcr.io/deedee-ops/alpine:3.20.2
 

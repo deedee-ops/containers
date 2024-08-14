@@ -9,7 +9,7 @@
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/onedr0p/radarr",
       "renovate::versioning": "loose",
-      "version": "5.8.3.8933",
+      "version": "5.7.0.8882",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
@@ -20,7 +20,7 @@
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/onedr0p/radarr-develop",
       "renovate::versioning": "loose",
-      "version": "5.8.3.8933",
+      "version": "5.8.2.8915",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
