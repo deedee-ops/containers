@@ -1,0 +1,17 @@
+{
+  "app": "wakapi",
+  "base": false,
+  "testMuteCmd": false,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "ghcr.io/muety/wakapi",
+      "version": "2.11.2",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
