@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/miniflux/miniflux",
-      "version": "2.1.4",
+      "version": "2.2.0",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
