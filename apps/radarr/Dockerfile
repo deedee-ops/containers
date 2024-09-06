@@ -1,6 +1,6 @@
 ARG VERSION
 ARG METAVAR
-FROM public.ecr.aws/docker/library/alpine:3.20.2 as builder
+FROM public.ecr.aws/docker/library/alpine:3.20.3 as builder
 
 ARG VERSION
 ARG METAVAR
