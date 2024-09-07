@@ -2,7 +2,7 @@ ARG TARGETPLATFORM
 ARG VERSION
 FROM ghcr.io/muety/wakapi:${VERSION} as source
 
-FROM ghcr.io/deedee-ops/alpine:3.20.2
+FROM ghcr.io/deedee-ops/alpine:3.20.3
 
 ARG TARGETPLATFORM
 ARG VERSION

@@ -1,5 +1,5 @@
 ARG VERSION
-FROM ghcr.io/deedee-ops/alpine:3.20.2 as builder
+FROM ghcr.io/deedee-ops/alpine:3.20.3 as builder
 
 FROM ghcr.io/onedr0p/home-assistant:${VERSION}
 
