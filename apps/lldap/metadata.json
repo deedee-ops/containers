@@ -9,7 +9,7 @@
       "renovate::depName": "ghcr.io/lldap/lldap",
       "renovate::extractVersion": "^(?<version>[0-9]+-[0-9]+-[0-9]+)$",
       "renovate::versioning": "regex:^(?<major>[0-9]+)-(?<minor>[0-9]+)-(?<patch>[0-9]+)$",
-      "version": "2024-09-07",
+      "version": "2024-09-08",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
