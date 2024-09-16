@@ -64,4 +64,8 @@ for dbname in ${INIT_POSTGRES_DBNAME}; do
     fi
     printf "\e[1;32m%-6s\e[m\n" "Update User Privileges on Database ..."
     psql --command "grant all privileges on database \"${dbname}\" to \"${INIT_POSTGRES_USER}\";"
+
+    if [ -f "/config/${dbname}.sql" ]; then
+      psql -f "/config/${dbname}.sql" "${dbname}"
+    fi
 done
