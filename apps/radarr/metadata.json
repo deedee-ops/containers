@@ -31,7 +31,7 @@
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/onedr0p/radarr-nightly",
       "renovate::versioning": "loose",
-      "version": "5.10.4.9212",
+      "version": "5.10.4.9214",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
