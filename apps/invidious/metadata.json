@@ -9,8 +9,7 @@
       "renovate::depName": "quay.io/invidious/invidious",
       "version": "latest",
       "platforms": [
-        "linux/amd64",
-        "linux/arm64"
+        "linux/amd64"
       ]
     }
   ]
