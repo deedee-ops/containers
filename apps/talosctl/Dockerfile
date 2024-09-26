@@ -1,7 +1,5 @@
 ARG TARGETPLATFORM
 ARG VERSION
-FROM ghcr.io/foxcpp/maddy:${VERSION} as source
-
 FROM ghcr.io/deedee-ops/alpine:3.20.3
 
 ARG TARGETPLATFORM
