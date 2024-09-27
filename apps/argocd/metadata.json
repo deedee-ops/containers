@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "docker",
       "renovate::depName": "quay.io/argoproj/argocd",
-      "version": "2.12.4",
+      "version": "2.13.0",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
