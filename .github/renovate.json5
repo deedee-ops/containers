@@ -16,6 +16,7 @@
     "github>deedee-ops/containers//.github/renovate/autoMerge.json5",
     "github>deedee-ops/containers//.github/renovate/commitMessage.json5",
     "github>deedee-ops/containers//.github/renovate/customManagers.json5",
+    "github>deedee-ops/containers//.github/renovate/customVersions.json5",
     "github>deedee-ops/containers//.github/renovate/labels.json5",
     "github>deedee-ops/containers//.github/renovate/semanticCommits.json5"
   ],

@@ -1,0 +1,40 @@
+From 5a58751a053ea59b88399487a5f0f8f5c27b9461 Mon Sep 17 00:00:00 2001
+From: Ryan Hockstad <ryanhockstad@gmail.com>
+Date: Wed, 13 Mar 2024 18:17:00 -0400
+Subject: [PATCH] merge null child chart objects
+
+Signed-off-by: Ryan Hockstad <ryanhockstad@gmail.com>
+---
+ pkg/chartutil/coalesce.go | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/pkg/chartutil/coalesce.go b/pkg/chartutil/coalesce.go
+index f0272fd6abc..40bce2a68e4 100644
+--- a/pkg/chartutil/coalesce.go
++++ b/pkg/chartutil/coalesce.go
+@@ -237,6 +237,9 @@ func coalesceValues(printf printFn, c *chart.Chart, v map[string]interface{}, pr
+ 						printf("warning: skipped value for %s.%s: Not a table.", subPrefix, key)
+ 					}
+ 				} else {
++					// If the key is a child chart, coalesce tables with Merge set to true
++					merge := childChartMergeTrue(c, key, merge)
++
+ 					// Because v has higher precedence than nv, dest values override src
+ 					// values.
+ 					coalesceTablesFullKey(printf, dest, src, concatPrefix(subPrefix, key), merge)
+@@ -249,6 +252,15 @@ func coalesceValues(printf printFn, c *chart.Chart, v map[string]interface{}, pr
+ 	}
+ }
+ 
++func childChartMergeTrue(chrt *chart.Chart, key string, merge bool) bool {
++	for _, subchart := range chrt.Dependencies() {
++		if subchart.Name() == key {
++			return true
++		}
++	}
++	return merge
++}
++
+ // CoalesceTables merges a source map into a destination map.
+ //
+ // dest is considered authoritative.
