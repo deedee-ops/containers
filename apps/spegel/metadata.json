@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/spegel-org/spegel",
-      "version": "0.0.24",
+      "version": "0.0.25",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
