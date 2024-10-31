@@ -59,6 +59,7 @@ COPY --from=builder /go/bin/envdir /usr/bin/envdir
 COPY --from=builder /go/bin/envsubst /usr/bin/envsubst
 COPY --chmod=0755 --chown=65000:65000 base-entrypoint.sh /usr/local/bin/base-entrypoint.sh
 
+USER 65000:65000
 VOLUME ["/config", "/tmp"]
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/base-entrypoint.sh"]
 CMD ["/entrypoint.sh"]
