@@ -64,9 +64,10 @@ COPY --from=builder /go/bin/envdir /usr/bin/envdir
 COPY --from=builder /go/bin/envsubst /usr/bin/envsubst
 COPY --chmod=0755 --chown=65000:65000 base-entrypoint.sh /usr/local/bin/base-entrypoint.sh
 COPY --chown=65000:65000 _/app/config.yaml.tmpl /app/config.yaml.tmpl
-COPY --chown=65000:65000 _/add-ons/subcleaner/regex_profiles/default/polish.conf /add-ons/subcleaner/regex_profiles/default/polish.conf 
-COPY --chown=65000:65000 _/add-ons/subcleaner/subcleaner.conf /add-ons/subcleaner/subcleaner.conf 
+COPY --chown=65000:65000 _/add-ons/subcleaner/regex_profiles/default/polish.conf /add-ons/subcleaner/regex_profiles/default/polish.conf
+COPY --chown=65000:65000 _/add-ons/subcleaner/subcleaner.conf /add-ons/subcleaner/subcleaner.conf
 
+USER 65000:65000
 VOLUME ["/config", "/tmp"]
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/base-entrypoint.sh"]
 CMD ["/entrypoint.sh"]
