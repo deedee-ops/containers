@@ -5,6 +5,10 @@ name: "Render Readme"
 
 'on': workflow_call
 
+concurrency:
+  group: render-readme
+  cancel-in-progress: true
+
 jobs:
   render-readme:
     name: Render README
