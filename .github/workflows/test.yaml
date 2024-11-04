@@ -46,19 +46,22 @@ jobs:
           baseimg_build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion' ./apps/${{ matrix.apps.app }}/metadata.json)
           metavar=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .metavar' ./apps/${{ matrix.apps.app }}/metadata.json)
 
-          echo "build_version=${build_version}" >> $GITHUB_OUTPUT
-          echo "baseimg_build_version=${baseimg_build_version}" >> $GITHUB_OUTPUT
-          echo "metavar=${metavar}" >> $GITHUB_OUTPUT
-          echo "goss_file=./apps/${{ matrix.apps.app }}/ci/goss.yaml" >> $GITHUB_OUTPUT
+          {
+            echo "build_version=${build_version}"
+            echo "baseimg_build_version=${baseimg_build_version}"
+            echo "metavar=${metavar}"
+            echo "goss_file=./apps/${{ matrix.apps.app }}/ci/goss.yaml"
+          } >> "$GITHUB_OUTPUT"
+
           if [[ "${test_mute_cmd}" == true ]]; then
-            echo "goss_args=tail -f /dev/null" >> $GITHUB_OUTPUT
-            echo "goss_entrypoint=--entrypoint ''" >> $GITHUB_OUTPUT
+            echo "goss_args=tail -f /dev/null" >> "$GITHUB_OUTPUT"
+            echo "goss_entrypoint=--entrypoint ''" >> "$GITHUB_OUTPUT"
           fi
           if [[ "${insecure}" != true ]]; then
-            echo "goss_secure=--read-only -u 65000:65000" >> $GITHUB_OUTPUT
+            echo "goss_secure=--read-only -u 65000:65000" >> "$GITHUB_OUTPUT"
           fi
           if [ -d ./apps/${{ matrix.apps.app }}/ci/secrets ]; then
-            echo "goss_run_env=-v $(pwd)/apps/${{ matrix.apps.app }}/ci/secrets:/secrets" >> $GITHUB_OUTPUT
+            echo "goss_run_env=-v $(pwd)/apps/${{ matrix.apps.app }}/ci/secrets:/secrets" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Setup Goss
@@ -122,6 +125,7 @@ jobs:
     name: Build matrix success
     runs-on: ubuntu-latest
     needs:
+      - prepare-matrix
       - test
     if: ${{ needs.prepare-matrix.outputs.matrix != '' && needs.prepare-matrix.outputs.matrix != '[]' }}
     steps:

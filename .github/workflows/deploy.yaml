@@ -40,22 +40,25 @@ jobs:
         id: vars
         shell: bash
         run: |-
-          base_image=$(jq '.base' --raw-output apps/${{ matrix.apps.app }}/metadata.json)
-          test_mute_cmd=$(jq '.testMuteCmd' --raw-output apps/${{ matrix.apps.app }}/metadata.json)
-          build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | if .version == "master" then "latest" else .version end' ./apps/${{ matrix.apps.app }}/metadata.json)
-          build_metavar=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .metavar' ./apps/${{ matrix.apps.app }}/metadata.json)
-          baseimg_build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion' ./apps/${{ matrix.apps.app }}/metadata.json)
+          base_image="$(jq '.base' --raw-output apps/${{ matrix.apps.app }}/metadata.json)"
+          test_mute_cmd="$(jq '.testMuteCmd' --raw-output apps/${{ matrix.apps.app }}/metadata.json)"
+          build_version="$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | if .version == "master" then "latest" else .version end' ./apps/${{ matrix.apps.app }}/metadata.json)"
+          build_metavar="$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .metavar' ./apps/${{ matrix.apps.app }}/metadata.json)"
+          baseimg_build_version="$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion' ./apps/${{ matrix.apps.app }}/metadata.json)"
+          export test_mute_cmd
 
-          echo "build_date=$(date --rfc-3339=seconds --utc)" >> $GITHUB_OUTPUT
-          echo "build_version=${build_version}" >> $GITHUB_OUTPUT
-          echo "build_metavar=${build_metavar}" >> $GITHUB_OUTPUT
-          echo "baseimg_build_version=${baseimg_build_version}" >> $GITHUB_OUTPUT
-          echo "base_image=${base_image}" >> $GITHUB_OUTPUT
-          echo "platforms=$(jq --arg chan "${{ matrix.apps.channel }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .platforms | join(",")' ./apps/${{ matrix.apps.app }}/metadata.json)" >> $GITHUB_OUTPUT
+          {
+            echo "build_date=$(date --rfc-3339=seconds --utc)"
+            echo "build_version=${build_version}"
+            echo "build_metavar=${build_metavar}"
+            echo "baseimg_build_version=${baseimg_build_version}"
+            echo "base_image=${base_image}"
+            echo "platforms=$(jq --arg chan "${{ matrix.apps.channel }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .platforms | join(",")' ./apps/${{ matrix.apps.app }}/metadata.json)"
+          } >> "$GITHUB_OUTPUT"
           if [[ "${base_image}" == true ]]; then
-            echo "label_type=org.opencontainers.image.base" >> $GITHUB_OUTPUT
+            echo "label_type=org.opencontainers.image.base" >> "$GITHUB_OUTPUT"
           else
-            echo "label_type=org.opencontainers.image" >> $GITHUB_OUTPUT
+            echo "label_type=org.opencontainers.image" >> "$GITHUB_OUTPUT"
           fi
 
           tags="$(echo "${build_version}" | \
@@ -66,12 +69,14 @@ jobs:
           sed 's@#@,${{ env.IMAGE_REGISTRY }}/${{ github.repository_owner }}/${{ matrix.apps.app }}---suffix:@g' | \
           awk -F\# '{ print $0 ",${{ env.IMAGE_REGISTRY }}/${{ github.repository_owner }}/${{ matrix.apps.app }}---suffix:latest"}')"
           if [[ "${{ matrix.apps.channel }}" == "stable" ]]; then
-            tags="$(sed 's@---suffix@@g' <<< "${tags}")"
+            tags="${tags//---suffix/}"
+            # tags="$(sed 's@---suffix@@g' <<< "${tags}")"
           else
-            tags="$(sed 's@---suffix@-${{ matrix.apps.channel }}@g' <<< "${tags}")"
+            tags="${tags//---suffix/-${{ matrix.apps.channel }}}"
+            # tags="$(sed 's@---suffix@-${{ matrix.apps.channel }}@g' <<< "${tags}")"
           fi
 
-          echo "tags=${tags}" >> $GITHUB_OUTPUT
+          echo "tags=${tags}" >> "$GITHUB_OUTPUT"
 
       - name: Setup QEMU
         uses: docker/setup-qemu-action@49b3bc8e6bdd4a60e6116a5414239cba5943d3cf # v3.2.0
