@@ -1,0 +1,17 @@
+{
+  "app": "memos",
+  "base": false,
+  "testMuteCmd": true,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "ghcr.io/usememos/memos",
+      "version": "0.22.5",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
