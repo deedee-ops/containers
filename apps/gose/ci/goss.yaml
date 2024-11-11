@@ -1,0 +1,31 @@
+---
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#group
+group:
+  abc:
+    exists: true
+    gid: 65000
+# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#file
+file:
+  /usr/bin/memos:
+    exists: true
+# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#http
+http:
+  http://localhost:8080/api/v1/healthz:
+    status: 200
+    timeout: 1000
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#mount
+mount:
+  /config:
+    exists: true
+  /tmp:
+    exists: true
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#port
+port:
+  tcp6:8080:
+    listening: true
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#user
+user:
+  abc:
+    exists: true
+    uid: 65000
+    gid: 65000
