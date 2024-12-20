@@ -10,7 +10,7 @@ RUN apk --update add --no-cache alpine-sdk curl git \
  && git clone https://github.com/eltorio/dcron.git . \
  && make CRONTAB_GROUP=abc CRONTABS=/var/spool/cron/crontabs
 
-FROM php:8.2-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 ARG TARGETPLATFORM
 ARG VERSION
