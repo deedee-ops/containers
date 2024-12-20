@@ -24,6 +24,7 @@
   "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
   "ignoreDeps": [
     "public.ecr.aws/docker/library/ubuntu",
-    "node"
+    "node",
+    "php"
   ]
 }
