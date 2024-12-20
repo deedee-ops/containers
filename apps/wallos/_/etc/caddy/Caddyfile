@@ -1,0 +1,26 @@
+{
+	auto_https off
+}
+
+:9000 {
+	log
+	root * /app
+	try_files {path} {path}/ /index.php?{query}
+	php_fastcgi unix//tmp/php-fpm.sock
+
+	# Safety net, just in case
+	file_server {
+		hide .git .gitignore
+	}
+
+	# enable compression
+	encode zstd gzip
+
+	# Remove leaky headers
+	header {
+		-Server
+		-X-Powered-By
+		Referrer-Policy no-referrer-when-downgrade
+		X-Content-Type-Options nosniff
+	}
+}
