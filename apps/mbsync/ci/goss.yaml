@@ -1,20 +1,20 @@
 ---
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#group
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#group
 group:
   abc:
     exists: true
     gid: 65000
-# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#file
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#file
 file:
   /usr/bin/mbsync:
     exists: true
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#mount
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#mount
 mount:
   /config:
     exists: true
   /tmp:
     exists: true
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#user
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#user
 user:
   abc:
     exists: true

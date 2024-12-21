@@ -1,10 +1,10 @@
 ---
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#group
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#group
 group:
   www-data:
     exists: true
     gid: 65000
-# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#file
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#file
 file:
   /usr/local/bin/base-entrypoint.sh:
     exists: true
@@ -12,20 +12,20 @@ file:
     exists: true
   /usr/local/bin/entrypoint.sh:
     exists: true
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#http
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#http
 http:
   http://localhost:8080/health:
     status: 200
     timeout: 1000
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#mount
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#mount
 mount:
   /tmp:
     exists: true
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#port
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#port
 port:
   tcp:8080:
     listening: true
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#user
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#user
 user:
   www-data:
     exists: true

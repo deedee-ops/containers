@@ -1,14 +1,14 @@
 ---
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#group
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#group
 group:
   abc:
     exists: true
     gid: 65000
-# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#file
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#file
 file:
   /usr/bin/csp_exporter:
     exists: true
-# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#http
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#http
 http:
   http://localhost:9477/metrics:
     status: 200
@@ -16,17 +16,17 @@ http:
   http://localhost:8000/report/csp/test:
     status: 400
     timeout: 1000
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#mount
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#mount
 mount:
   /tmp:
     exists: true
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#port
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#port
 port:
   tcp6:8000:
     listening: true
   tcp6:9477:
     listening: true
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#user
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#user
 user:
   abc:
     exists: true

@@ -1,10 +1,10 @@
 ---
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#group
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#group
 group:
   abc:
     exists: true
     gid: 65000
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#mount
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#mount
 mount:
   /config:
     exists: true
@@ -12,11 +12,11 @@ mount:
     exists: true
   /tmp:
     exists: true
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#port
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#port
 port:
   tcp6:9000:
     listening: true
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#process
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#process
 process:
   caddy:
     running: true
@@ -24,7 +24,7 @@ process:
     running: true
   php-fpm:
     running: true
-# https://github.com/goss-org/goss/blob/master/docs/manual.md#user
+# https://github.com/goss-org/goss/blob/master/docs/gossfile.md#user
 user:
   abc:
     exists: true
