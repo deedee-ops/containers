@@ -1,0 +1,28 @@
+{
+	auto_https off
+}
+
+:9000 {
+	log
+	root * /app/public
+	php_fastcgi unix//tmp/php-fpm.sock
+
+	redir /.well-known/carddav /dav/ 301
+	redir /.well-known/caldav /dav/ 301
+
+	# Safety net, just in case
+	file_server {
+		hide .git .gitignore
+	}
+
+	# enable compression
+	encode zstd gzip
+
+	# Remove leaky headers
+	header {
+		-Server
+		-X-Powered-By
+		Referrer-Policy no-referrer-when-downgrade
+		X-Content-Type-Options nosniff
+	}
+}

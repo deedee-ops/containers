@@ -1,0 +1,43 @@
+---
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#file
+file:
+  /app/public:
+    filetype: directory
+    exists: true
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#group
+group:
+  abc:
+    exists: true
+    gid: 65000
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#mount
+mount:
+  /app/var/cache:
+    exists: true
+  /app/vendor/doctrine/cache:
+    exists: true
+  /app/vendor/psr/cache:
+    exists: true
+  /app/vendor/symfony/cache:
+    exists: true
+  /config:
+    exists: true
+  /data:
+    exists: true
+  /tmp:
+    exists: true
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#port
+port:
+  tcp6:9000:
+    listening: true
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#process
+process:
+  caddy:
+    running: true
+  php-fpm:
+    running: true
+# https://github.com/goss-org/goss/blob/master/docs/manual.md#user
+user:
+  abc:
+    exists: true
+    uid: 65000
+    gid: 65000
