@@ -4,6 +4,9 @@ file:
   /app/public:
     filetype: directory
     exists: true
+  /tmp/webdav:
+    filetype: directory
+    exists: true
 # https://github.com/goss-org/goss/blob/master/docs/gossfile.md#group
 group:
   abc:
