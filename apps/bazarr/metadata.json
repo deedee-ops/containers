@@ -8,7 +8,7 @@
       "metavar": "",
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/onedr0p/bazarr",
-      "version": "1.5",
+      "version": "1.5.1",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
