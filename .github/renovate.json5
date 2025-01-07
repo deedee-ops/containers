@@ -26,5 +26,8 @@
     "public.ecr.aws/docker/library/ubuntu",
     "node",
     "php"
+  ],
+  "ignorePaths": [
+    "apps/firefoxsync/**" // firefoxsync is dead and uses legacy dependencies
   ]
 }
