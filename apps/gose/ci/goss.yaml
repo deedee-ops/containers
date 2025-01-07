@@ -6,11 +6,11 @@ group:
     gid: 65000
 # https://github.com/goss-org/goss/blob/master/docs/gossfile.md#file
 file:
-  /usr/bin/memos:
+  /usr/bin/gose:
     exists: true
 # https://github.com/goss-org/goss/blob/master/docs/gossfile.md#http
 http:
-  http://localhost:8080/api/v1/healthz:
+  http://localhost:8080/:
     status: 200
     timeout: 1000
 # https://github.com/goss-org/goss/blob/master/docs/gossfile.md#mount
