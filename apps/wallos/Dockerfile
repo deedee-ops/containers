@@ -1,6 +1,6 @@
 ARG TARGETPLATFORM
 ARG VERSION
-FROM ghcr.io/deedee-ops/alpine:3.21.1 AS source
+FROM ghcr.io/deedee-ops/alpine:3.21.2 AS source
 
 WORKDIR /app
 
