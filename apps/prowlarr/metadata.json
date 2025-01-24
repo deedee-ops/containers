@@ -9,7 +9,7 @@
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/onedr0p/prowlarr",
       "renovate::versioning": "loose",
-      "version": "1.29.2.4915",
+      "version": "1.30.2.4939",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
