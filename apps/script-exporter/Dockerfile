@@ -1,7 +1,7 @@
 ARG TARGETPLATFORM
 ARG VERSION
 FROM ricoberger/script_exporter:v${VERSION} as source
-FROM docker.io/bitnami/kubectl:1.32.1 as kubectl
+FROM docker.io/bitnami/kubectl:1.32.2 as kubectl
 
 FROM ghcr.io/deedee-ops/alpine:3.21.2
 
