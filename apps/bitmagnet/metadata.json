@@ -1,0 +1,17 @@
+{
+  "app": "bitmagnet",
+  "base": false,
+  "testMuteCmd": true,
+  "channels": [
+    {
+      "name": "stable",
+      "renovate::dataSource": "docker",
+      "renovate::depName": "ghcr.io/bitmagnet-io/bitmagnet",
+      "version": "0.9.5",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
