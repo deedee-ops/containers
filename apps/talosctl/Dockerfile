@@ -1,6 +1,6 @@
 ARG TARGETPLATFORM
 ARG VERSION
-FROM ghcr.io/deedee-ops/alpine:3.21.2
+FROM ghcr.io/deedee-ops/alpine:3.21.3
 
 ARG TARGETPLATFORM
 ARG VERSION

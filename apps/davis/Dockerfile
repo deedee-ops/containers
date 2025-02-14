@@ -1,6 +1,6 @@
 ARG TARGETPLATFORM
 ARG VERSION
-FROM ghcr.io/deedee-ops/alpine:3.21.2 AS source
+FROM ghcr.io/deedee-ops/alpine:3.21.3 AS source
 
 FROM ghcr.io/tchapi/davis:${VERSION}
 
