@@ -2,14 +2,21 @@ ARG TARGETPLATFORM
 ARG VERSION
 FROM ghcr.io/authelia/authelia:${VERSION} as source
 
-FROM ghcr.io/deedee-ops/alpine:3.21.3
+FROM ghcr.io/deedee-ops/ubuntu:22.04
 
 ARG TARGETPLATFORM
 ARG VERSION
 ARG CHANNEL
 
-#hadolint ignore=DL3018
-RUN apk --no-cache add yq
+#hadolint ignore=DL3008
+RUN set -eux \
+ && apt-get update \
+ && apt-get install --yes --no-install-recommends gnupg2 software-properties-common \
+ && add-apt-repository -y ppa:rmescandon/yq \
+ && apt-get update \
+ && apt-get install --yes --no-install-recommends yq \
+ && apt-get clean -y \
+ && rm -rf /var/lib/apt/lists/* /var/tmp/* /usr/share/man /usr/local/man /usr/local/share/man
 
 ENV SKIP_FILE_SECRETS_EXPANSION=1
 
