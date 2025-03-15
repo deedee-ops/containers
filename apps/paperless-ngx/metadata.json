@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/paperless-ngx/paperless-ngx",
-      "version": "2.14.7",
+      "version": "2.15.0",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
