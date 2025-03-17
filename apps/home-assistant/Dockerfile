@@ -1,7 +1,7 @@
 ARG VERSION
 FROM ghcr.io/deedee-ops/alpine:3.21.3 as builder
 
-FROM ghcr.io/onedr0p/home-assistant:${VERSION}
+FROM ghcr.io/home-operations/home-assistant:${VERSION}
 
 # hadolint ignore=DL3002
 USER root

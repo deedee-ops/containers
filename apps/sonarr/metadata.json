@@ -6,7 +6,7 @@
     {
       "name": "devel",
       "renovate::dataSource": "docker",
-      "renovate::depName": "ghcr.io/onedr0p/sonarr",
+      "renovate::depName": "ghcr.io/home-operations/sonarr",
       "renovate::versioning": "loose",
       "version": "4.0.14.2938",
       "platforms": [

@@ -28,7 +28,7 @@ RUN set -x \
  && upx --ultra-brute /go/bin/envdir
 
 ARG VERSION
-FROM ghcr.io/onedr0p/radarr:${VERSION}
+FROM ghcr.io/home-operations/radarr:${VERSION}
 
 # hadolint ignore=DL3002
 USER root

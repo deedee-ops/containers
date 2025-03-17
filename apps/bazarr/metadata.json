@@ -6,7 +6,7 @@
     {
       "name": "stable",
       "renovate::dataSource": "docker",
-      "renovate::depName": "ghcr.io/onedr0p/bazarr",
+      "renovate::depName": "ghcr.io/home-operations/bazarr",
       "version": "1.5.1",
       "platforms": [
         "linux/amd64",

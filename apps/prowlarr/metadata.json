@@ -6,7 +6,7 @@
     {
       "name": "devel",
       "renovate::dataSource": "docker",
-      "renovate::depName": "ghcr.io/onedr0p/prowlarr",
+      "renovate::depName": "ghcr.io/home-operations/prowlarr",
       "renovate::versioning": "loose",
       "version": "1.32.2.4987",
       "platforms": [

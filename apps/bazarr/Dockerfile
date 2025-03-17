@@ -28,7 +28,7 @@ RUN set -x \
  && upx --ultra-brute /go/bin/envdir
 
 ARG VERSION
-FROM ghcr.io/onedr0p/bazarr:${VERSION}
+FROM ghcr.io/home-operations/bazarr:${VERSION}
 
 # hadolint ignore=DL3002
 USER root

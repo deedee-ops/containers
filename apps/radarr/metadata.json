@@ -6,7 +6,7 @@
     {
       "name": "devel",
       "renovate::dataSource": "docker",
-      "renovate::depName": "ghcr.io/onedr0p/radarr",
+      "renovate::depName": "ghcr.io/home-operations/radarr",
       "renovate::versioning": "loose",
       "version": "5.20.1.9773",
       "platforms": [
