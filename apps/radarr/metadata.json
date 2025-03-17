@@ -4,34 +4,11 @@
   "testMuteCmd": false,
   "channels": [
     {
-      "name": "stable",
-      "metavar": "",
+      "name": "devel",
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/onedr0p/radarr",
       "renovate::versioning": "loose",
-      "version": "5.19.3.9730",
-      "platforms": [
-        "linux/amd64",
-        "linux/arm64"
-      ]
-    }, {
-      "name": "devel",
-      "metavar": "-develop",
-      "renovate::dataSource": "docker",
-      "renovate::depName": "ghcr.io/onedr0p/radarr-develop",
-      "renovate::versioning": "loose",
       "version": "5.20.1.9773",
-      "platforms": [
-        "linux/amd64",
-        "linux/arm64"
-      ]
-    }, {
-      "name": "nightly",
-      "metavar": "-nightly",
-      "renovate::dataSource": "docker",
-      "renovate::depName": "ghcr.io/onedr0p/radarr-nightly",
-      "renovate::versioning": "loose",
-      "version": "5.20.2.9775",
       "platforms": [
         "linux/amd64",
         "linux/arm64"

@@ -43,14 +43,12 @@ jobs:
           base_image="$(jq '.base' --raw-output apps/${{ matrix.apps.app }}/metadata.json)"
           test_mute_cmd="$(jq '.testMuteCmd' --raw-output apps/${{ matrix.apps.app }}/metadata.json)"
           build_version="$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | if .version == "master" then "latest" else .version end' ./apps/${{ matrix.apps.app }}/metadata.json)"
-          build_metavar="$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .metavar' ./apps/${{ matrix.apps.app }}/metadata.json)"
           baseimg_build_version="$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion' ./apps/${{ matrix.apps.app }}/metadata.json)"
           export test_mute_cmd
 
           {
             echo "build_date=$(date --rfc-3339=seconds --utc)"
             echo "build_version=${build_version}"
-            echo "build_metavar=${build_metavar}"
             echo "baseimg_build_version=${baseimg_build_version}"
             echo "base_image=${base_image}"
             echo "platforms=$(jq --arg chan "${{ matrix.apps.channel }}" --raw-output '(.channels | .[] | select(.name == $chan)) | .platforms | join(",")' ./apps/${{ matrix.apps.app }}/metadata.json)"
@@ -104,7 +102,6 @@ jobs:
         with:
           build-args: |-
             BASEIMGVERSION=${{ steps.vars.outputs.baseimg_build_version }}
-            METAVAR=${{ steps.vars.outputs.build_metavar }}
             VERSION=${{ steps.vars.outputs.build_version }}
             CHANNEL=${{ matrix.apps.channel }}
           labels: |-

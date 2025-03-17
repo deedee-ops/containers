@@ -44,12 +44,10 @@ jobs:
           test_mute_cmd=$(jq '.testMuteCmd' --raw-output apps/${{ matrix.apps.app }}/metadata.json)
           build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .version' ./apps/${{ matrix.apps.app }}/metadata.json)
           baseimg_build_version=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .baseimgversion' ./apps/${{ matrix.apps.app }}/metadata.json)
-          metavar=$(jq --arg chan ${{ matrix.apps.channel }} --raw-output '(.channels | .[] | select(.name == $chan)) | .metavar' ./apps/${{ matrix.apps.app }}/metadata.json)
 
           {
             echo "build_version=${build_version}"
             echo "baseimg_build_version=${baseimg_build_version}"
-            echo "metavar=${metavar}"
             echo "goss_file=./apps/${{ matrix.apps.app }}/ci/goss.yaml"
           } >> "$GITHUB_OUTPUT"
 
@@ -87,7 +85,6 @@ jobs:
         with:
           build-args: |-
             BASEIMGVERSION=${{ steps.vars.outputs.baseimg_build_version }}
-            METAVAR=${{ steps.vars.outputs.metavar }}
             VERSION=${{ steps.vars.outputs.build_version }}
             CHANNEL=${{ matrix.apps.channel }}
           context: apps/${{ matrix.apps.app }}

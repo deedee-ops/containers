@@ -1,9 +1,7 @@
 ARG VERSION
-ARG METAVAR
 FROM public.ecr.aws/docker/library/alpine:3.21.3 as builder
 
 ARG VERSION
-ARG METAVAR
 ARG TARGETOS
 ARG TARGETARCH
 ARG TARGETVARIANT=""
@@ -30,8 +28,7 @@ RUN set -x \
  && upx --ultra-brute /go/bin/envdir
 
 ARG VERSION
-ARG METAVAR
-FROM ghcr.io/onedr0p/bazarr${METAVAR}:${VERSION}
+FROM ghcr.io/onedr0p/bazarr:${VERSION}
 
 # hadolint ignore=DL3002
 USER root

@@ -5,7 +5,6 @@
   "channels": [
     {
       "name": "stable",
-      "metavar": "",
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/onedr0p/bazarr",
       "version": "1.5.1",

@@ -4,34 +4,11 @@
   "testMuteCmd": false,
   "channels": [
     {
-      "name": "stable",
-      "metavar": "",
+      "name": "devel",
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/onedr0p/prowlarr",
       "renovate::versioning": "loose",
       "version": "1.32.2.4987",
-      "platforms": [
-        "linux/amd64",
-        "linux/arm64"
-      ]
-    }, {
-      "name": "devel",
-      "metavar": "-develop",
-      "renovate::dataSource": "docker",
-      "renovate::depName": "ghcr.io/onedr0p/prowlarr-develop",
-      "renovate::versioning": "loose",
-      "version": "1.32.2.4987",
-      "platforms": [
-        "linux/amd64",
-        "linux/arm64"
-      ]
-    }, {
-      "name": "nightly",
-      "metavar": "-nightly",
-      "renovate::dataSource": "docker",
-      "renovate::depName": "ghcr.io/onedr0p/prowlarr-nightly",
-      "renovate::versioning": "loose",
-      "version": "1.33.0.4991",
       "platforms": [
         "linux/amd64",
         "linux/arm64"

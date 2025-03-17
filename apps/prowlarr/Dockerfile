@@ -1,9 +1,7 @@
 ARG VERSION
-ARG METAVAR
 FROM public.ecr.aws/docker/library/alpine:3.21.3 as builder
 
 ARG VERSION
-ARG METAVAR
 ARG TARGETOS
 ARG TARGETARCH
 ARG TARGETVARIANT=""
@@ -30,8 +28,7 @@ RUN set -x \
  && upx --ultra-brute /go/bin/envdir
 
 ARG VERSION
-ARG METAVAR
-FROM ghcr.io/onedr0p/prowlarr${METAVAR}:${VERSION}
+FROM ghcr.io/onedr0p/prowlarr:${VERSION}
 
 # hadolint ignore=DL3002
 USER root
@@ -61,6 +58,6 @@ COPY --chmod=0755 --chown=65000:65000 base-entrypoint.sh /usr/local/bin/base-ent
 
 VOLUME ["/config", "/tmp"]
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/base-entrypoint.sh"]
-CMD ["/entrypoint.sh"]
+CMD ["/app/bin/Prowlarr", "--nobrowser", "--data=/config"]
 
 LABEL org.opencontainers.image.source="https://github.com/Prowlarr/Prowlarr"
