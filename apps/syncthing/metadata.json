@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "docker",
       "renovate::depName": "syncthing/syncthing",
-      "version": "1.29.3",
+      "version": "1.29.4",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
