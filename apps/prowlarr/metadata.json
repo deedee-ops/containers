@@ -8,7 +8,7 @@
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/home-operations/prowlarr",
       "renovate::versioning": "loose",
-      "version": "1.32.2.4987",
+      "version": "1.33.0.4994",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
