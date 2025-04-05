@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "docker",
       "renovate::depName": "ricoberger/script_exporter",
-      "version": "2.24.2",
+      "version": "2.24.3",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
