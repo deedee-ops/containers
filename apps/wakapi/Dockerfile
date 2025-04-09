@@ -11,7 +11,8 @@ ARG CHANNEL
 COPY --from=source --chown=65000:65000 /app /app
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache bash
+RUN apk add --no-cache bash \
+ && sed -i'' -E 's@su -c (.*) app@\1@g' /app/entrypoint.sh
 
 USER 65000:65000
 EXPOSE 3000
