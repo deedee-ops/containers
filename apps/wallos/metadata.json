@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/ellite/wallos",
-      "version": "2.50.1",
+      "version": "2.51.0",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
