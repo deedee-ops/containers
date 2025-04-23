@@ -8,7 +8,7 @@
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/home-operations/radarr",
       "renovate::versioning": "loose",
-      "version": "5.22.3.9889",
+      "version": "5.22.4.9896",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
