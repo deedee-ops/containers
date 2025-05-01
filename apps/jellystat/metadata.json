@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "github-releases",
       "renovate::depName": "CyferShepard/Jellystat",
-      "version": "1.1.5",
+      "version": "1.1.6",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
