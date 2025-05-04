@@ -1,6 +1,6 @@
 ARG TARGETPLATFORM
 ARG VERSION
-FROM quay.io/invidious/invidious:latest@sha256:475133f5bb57d075ed39e823f0b99c994a4e90b3e8c4199301848daf18030507 AS source
+FROM quay.io/invidious/invidious:latest@sha256:c9b87b8e33484f0a2fd5fc9b386ddbad81b704b3361e45881b3821295ceabd6d AS source
 
 FROM ghcr.io/deedee-ops/alpine:3.21.3
 
