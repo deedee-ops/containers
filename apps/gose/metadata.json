@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "docker",
       "renovate::depName": "ghcr.io/stv0g/gose",
-      "version": "0.10.5",
+      "version": "0.10.6",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
