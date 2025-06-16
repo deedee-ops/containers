@@ -1,0 +1,15 @@
+{
+  "app": "powertop",
+  "base": false,
+  "testMuteCmd": true,
+  "channels": [
+    {
+      "name": "stable",
+      "version": "2.15",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ]
+    }
+  ]
+}
