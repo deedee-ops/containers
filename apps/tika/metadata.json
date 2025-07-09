@@ -8,7 +8,7 @@
       "renovate::dataSource": "github-tags",
       "renovate::depName": "apache/tika",
       "renovate::extractVersion": "^(?<version>(?:[0-9]+[.])+[0-9]+)$",
-      "version": "3.1.0",
+      "version": "3.2.1",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
