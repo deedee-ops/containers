@@ -2,7 +2,7 @@ ARG TARGETPLATFORM
 ARG VERSION
 FROM svenstaro/miniserve:${VERSION}-alpine as source
 
-FROM ghcr.io/deedee-ops/alpine:3.21.3
+FROM ghcr.io/deedee-ops/alpine:3.21.4
 
 ARG TARGETPLATFORM
 ARG VERSION

@@ -2,7 +2,7 @@ ARG TARGETPLATFORM
 ARG VERSION
 FROM ghcr.io/navidrome/navidrome:${VERSION} as source
 
-FROM ghcr.io/deedee-ops/alpine:3.21.3
+FROM ghcr.io/deedee-ops/alpine:3.21.4
 
 ARG TARGETPLATFORM
 ARG VERSION
