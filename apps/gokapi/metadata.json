@@ -7,7 +7,7 @@
       "name": "stable",
       "renovate::dataSource": "docker",
       "renovate::depName": "f0rc3/gokapi",
-      "version": "1.9.6",
+      "version": "2.0.0",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
